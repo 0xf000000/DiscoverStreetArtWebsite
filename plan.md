@@ -1,4 +1,4 @@
---------------------------------------------------------
+-------------------------------------------------------
 Plan for Discover StreetArt Website For Uni
 --------------------------------------------------------
 
@@ -71,7 +71,11 @@ DELETE api/v1/deleteUser
 
 
 
+# USER LOGIN SECURITY HANDELING
 
+i would use spring security for developing this kind of handeling
+
+so the deleteUser and addUser endpoints would fall appart
 
 
 

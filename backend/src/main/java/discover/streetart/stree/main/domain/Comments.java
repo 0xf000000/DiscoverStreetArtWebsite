@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "comments")
-public class comments {
+public class Comments {
 
     @Id
     private Long ID;

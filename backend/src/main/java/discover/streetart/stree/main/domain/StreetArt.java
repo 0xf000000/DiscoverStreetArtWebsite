@@ -13,6 +13,7 @@ public class StreetArt {
     @Id
     private Long streetArtid;
     private Float Geolocation;
+    private String picture_Name;
     private String base64_picture;
     private String creationDate;
     private String artist;

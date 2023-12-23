@@ -1,9 +1,7 @@
 package discover.streetart.stree.main.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 
@@ -11,6 +9,7 @@ import java.sql.Timestamp;
 @Table(name = "StreetArt")
 public class StreetArt {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long streetArtid;
     private Float Geolocation;
     private String picture_Name;

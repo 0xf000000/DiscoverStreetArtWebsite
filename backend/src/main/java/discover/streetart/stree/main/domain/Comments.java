@@ -1,6 +1,7 @@
 package discover.streetart.stree.main.domain;
 
 import jakarta.persistence.*;
+import org.springframework.lang.NonNull;
 
 import java.sql.Timestamp;
 
@@ -9,6 +10,7 @@ import java.sql.Timestamp;
 public class Comments {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
     // we need a extern key so we can order the comments to the StreetArt
 
@@ -17,6 +19,7 @@ public class Comments {
     private String User;
 
     // foreign key to StreetArt Entity
+    @NonNull
     @ManyToOne()
     @JoinColumn(name = "streetArtid")
     private StreetArt steetArt;

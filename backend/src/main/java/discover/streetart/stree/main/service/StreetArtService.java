@@ -18,6 +18,10 @@ public class StreetArtService {
 
     }
 
+    public void AddStreetArt(StreetArt streetArt){
+        streetArtRepositery.save(streetArt);
+    }
+
 
     public List<StreetArt> getAll(){
 

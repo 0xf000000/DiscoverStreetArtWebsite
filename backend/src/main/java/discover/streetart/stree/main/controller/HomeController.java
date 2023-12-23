@@ -13,5 +13,14 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/Upload")
+    public String upload(){
+        return "upload";
+    }
+    @RequestMapping("/Map")
+    public String map(){
+        return "map";
+    }
+
 
 }

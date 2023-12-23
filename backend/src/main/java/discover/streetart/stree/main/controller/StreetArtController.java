@@ -32,7 +32,6 @@ public class StreetArtController {
         return streetArtService.findById(id).orElseThrow(() ->  new StreetArtNotFoundException(id));
     }
 
-
     //Post
     @PostMapping( value = "/streetArt", consumes = "application/json;utf-8")
     StreetArt addStreetArt(@RequestBody StreetArt streetArt){
@@ -40,13 +39,6 @@ public class StreetArtController {
 
        return streetArtService.saveStreetARt(streetArt);
     }
-
-
-
-
-
-
-
     //put mapping should be maby implemented not sure rn
 
     //DELETE maby later

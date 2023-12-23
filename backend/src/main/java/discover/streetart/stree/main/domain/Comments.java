@@ -1,12 +1,16 @@
 package discover.streetart.stree.main.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.lang.NonNull;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "comments")
+@Getter
+@Setter
 public class Comments {
 
     // CONSTRUCTORS

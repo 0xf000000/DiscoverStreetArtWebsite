@@ -1,35 +1,54 @@
 package discover.streetart.stree.main.controller;
 
 
+import discover.streetart.stree.main.customExceptions.StreetArtNotFoundException;
 import discover.streetart.stree.main.domain.StreetArt;
 import discover.streetart.stree.main.repositery.StreetArtRepositery;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import discover.streetart.stree.main.service.StreetArtService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@RestController
+@RestController("/api/v1")
 public class StreetArtController {
-    private final StreetArtRepositery repositery;
-
-    public StreetArtController(StreetArtRepositery streetArtRepositery) {
-        this.repositery = streetArtRepositery;
-    }
-
-    @GetMapping("/streetArt/all")
-    List<StreetArt> all(){
-        return (List<StreetArt>) repositery.findAll();
-    }
-
-    
-
+    @Autowired
+  private StreetArtService streetArtService;
 
     //Get
+    @GetMapping( value = "/streetArt/all", produces = "application/json;utf-8")
+    List<StreetArt> getAllstreetArt(){
 
-    //Put
+        return streetArtService.getAll();
+    }
 
-    //DELETE
+    @GetMapping( value = "/streetArt/{id}", produces = "application/json;utf-8")
+   StreetArt Getbyid(@PathVariable Long id){
+
+
+        // error Handeling should be here
+        return streetArtService.findById(id).orElseThrow(() ->  new StreetArtNotFoundException(id));
+    }
+
 
     //Post
+    @PostMapping( value = "/streetArt", consumes = "application/json;utf-8")
+    StreetArt addStreetArt(@RequestBody StreetArt streetArt){
+
+
+       return streetArtService.saveStreetARt(streetArt);
+    }
+
+
+
+
+
+
+
+    //put mapping should be maby implemented not sure rn
+
+    //DELETE maby later
 
 }

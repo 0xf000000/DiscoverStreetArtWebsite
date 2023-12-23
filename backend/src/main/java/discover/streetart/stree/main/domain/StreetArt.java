@@ -2,11 +2,17 @@ package discover.streetart.stree.main.domain;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "StreetArt")
+@Getter
+@Setter
+@NoArgsConstructor
 public class StreetArt {
 
     // CONSTRUCTORS
@@ -19,6 +25,7 @@ public class StreetArt {
         this.date = date;
         this.creationDate = creationDate;
     }
+
 
 
 

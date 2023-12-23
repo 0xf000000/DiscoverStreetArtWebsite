@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController("/api/v1")
+@RestController()
 public class StreetArtController {
     @Autowired
   private StreetArtService streetArtService;
 
     //Get
-    @GetMapping( value = "/streetArt/all", produces = "application/json;utf-8")
+    @GetMapping( value = "/api/v1/streetArt/all", produces = "application/json;utf-8")
     List<StreetArt> getAllstreetArt(){
 
         return streetArtService.getAll();
     }
 
-    @GetMapping( value = "/streetArt/{id}", produces = "application/json;utf-8")
+    @GetMapping( value = "/api/v1/streetArt/{id}", produces = "application/json;utf-8")
    StreetArt Getbyid(@PathVariable Long id){
 
 
@@ -33,7 +33,7 @@ public class StreetArtController {
     }
 
     //Post
-    @PostMapping( value = "/streetArt", consumes = "application/json;utf-8")
+    @PostMapping( value = "api/v1/streetArt", consumes = "application/json;utf-8")
     StreetArt addStreetArt(@RequestBody StreetArt streetArt){
 
 

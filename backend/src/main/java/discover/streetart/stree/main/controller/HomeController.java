@@ -18,9 +18,7 @@ public class HomeController {
         return "upload";
     }
     @RequestMapping("/Map")
-    public String map(){
-        return "map";
-    }
+    public String map(){ return "map"; }
 
 
 }

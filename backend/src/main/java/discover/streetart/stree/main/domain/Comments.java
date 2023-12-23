@@ -9,6 +9,16 @@ import java.sql.Timestamp;
 @Table(name = "comments")
 public class Comments {
 
+    // CONSTRUCTORS
+    public Comments( String comment, String user, StreetArt streetArt, Timestamp date){
+        this.comment = comment;
+        this.User = user;
+        this.steetArt = streetArt;
+        this.date = date;
+    }
+
+    // DATA VALUES
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;

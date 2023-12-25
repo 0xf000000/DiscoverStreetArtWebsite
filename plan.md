@@ -53,20 +53,20 @@ GET -> api/v1/art/{$1}
 // get ALL streetArtPoint
 GET -> api/v1/art/all
 
+// add new streetartPoint
+POST -> api/v1/art
 
 // get all comments from the streetArt Point ID
 GET api/v1/comments/{$1} 
 
 
-// post new User 
-POST api/v1/art/
-
-// adds a User to the database
-PUT api/v1/adduser/
+// post a new comment
+POST api/v1/comments
 
 
-// deletes a user
-DELETE api/v1/deleteUser
+// not sure rn how we want the put mapping
+PUT mapping
+
 
 
 

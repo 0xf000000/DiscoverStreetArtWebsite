@@ -1,6 +1,7 @@
 package discover.streetart.stree.main.repositery;
 
 import discover.streetart.stree.main.domain.Comments;
+import discover.streetart.stree.main.domain.StreetArt;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -11,10 +12,10 @@ public interface CommentRepositery extends CrudRepository<Comments, Long> {
 
     /**
      * gets all comments from one StreetArtPoint
-     * @param id
+
      * @return
      */
-    @Query("SELECT id FROM Comments c  WHERE c.steetArt = ?1")
-    public List<Comments> getCommentsFromStreetArt(Long id);
+    @Query("SELECT comment FROM Comments c  WHERE c.streetArt = ?1")
+    public List<Comments> getCommentsFromStreetArt(StreetArt streetArt);
 
 }

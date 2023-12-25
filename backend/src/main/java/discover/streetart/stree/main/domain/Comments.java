@@ -1,7 +1,9 @@
 package discover.streetart.stree.main.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.NonNull;
 
@@ -11,13 +13,14 @@ import java.sql.Timestamp;
 @Table(name = "comments")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Comments {
 
     // CONSTRUCTORS
     public Comments( String comment, String user, StreetArt streetArt, Timestamp date){
         this.comment = comment;
         this.User = user;
-        this.steetArt = streetArt;
+        this.streetArt = streetArt;
         this.date = date;
     }
 
@@ -32,13 +35,16 @@ public class Comments {
     //User that wrote the commment
     private String User;
 
-    // foreign key to StreetArt Entity
-    @NonNull
-    @ManyToOne()
-    @JoinColumn(name = "streetArtid")
-    private StreetArt steetArt;
+
 
     // date on which the comment got written
     private Timestamp date;
+
+    // foreign key to StreetArt Entity
+    @NonNull
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "streetArtid")
+    private StreetArt streetArt;
 
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "StreetArt")
@@ -32,7 +34,7 @@ public class StreetArt {
     // DATA FIELDS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long streetArtid;
+    private Long streetArtId;
     private Float Geolocation;
     private String picture_Name;
     private String base64_picture;
@@ -40,6 +42,9 @@ public class StreetArt {
     private String artist;
     private String description;
     private Timestamp date;
+
+    @OneToMany(mappedBy = "streetArt", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comments> comments = new ArrayList<>();
 
 
 }

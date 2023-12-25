@@ -8,21 +8,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @NoArgsConstructor
-@Getter
-@Setter
+@Component
 public class CommentService  {
 
     @Autowired
     CommentRepositery commentRepositery;
-    public List<Comments> getCommentsFromStreetArtPoint(Long id){
 
-        return (List<Comments>) commentRepositery.getCommentsFromStreetArt(id);
-
-    }
 
     public void deleteComment(Long id){
         commentRepositery.deleteById(id);

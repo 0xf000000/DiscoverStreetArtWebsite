@@ -1,10 +1,10 @@
-package discover.streetart.stree.main.preConfig;
+package discover.streetart.main.preConfig;
 
 
-import discover.streetart.stree.main.domain.Comments;
-import discover.streetart.stree.main.domain.StreetArt;
-import discover.streetart.stree.main.repositery.CommentRepositery;
-import discover.streetart.stree.main.repositery.StreetArtRepositery;
+import discover.streetart.main.domain.Comments;
+import discover.streetart.main.domain.StreetArt;
+import discover.streetart.main.repositery.CommentRepositery;
+import discover.streetart.main.repositery.StreetArtRepositery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

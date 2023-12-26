@@ -1,4 +1,4 @@
-package discover.streetart.stree.main.domain;
+package discover.streetart.main.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

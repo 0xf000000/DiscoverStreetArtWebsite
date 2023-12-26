@@ -1,28 +1,29 @@
-package discover.streetart.stree.main.controller;
+package discover.streetart.main.controller;
 
 
-import discover.streetart.stree.main.customExceptions.StreetArtNotFoundException;
-import discover.streetart.stree.main.domain.StreetArt;
-import discover.streetart.stree.main.repositery.StreetArtRepositery;
-import discover.streetart.stree.main.service.StreetArtService;
+import discover.streetart.main.customExceptions.StreetArtNotFoundException;
+import discover.streetart.main.domain.StreetArt;
+import discover.streetart.main.service.StreetArtService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController()
 public class StreetArtController {
     @Autowired
   private StreetArtService streetArtService;
 
-    //Get
+    //Get all
     @GetMapping( value = "/api/v1/streetArt/all", produces = "application/json;utf-8")
     List<StreetArt> getAllstreetArt(){
 
         return streetArtService.getAll();
     }
+
+    // GET by id
 
     @GetMapping( value = "/api/v1/streetArt/{id}", produces = "application/json;utf-8")
    StreetArt Getbyid(@PathVariable Long id){
@@ -34,13 +35,20 @@ public class StreetArtController {
 
     //Post
     @PostMapping( value = "api/v1/streetArt", consumes = "application/json;utf-8")
-    StreetArt addStreetArt(@RequestBody StreetArt streetArt){
+    ResponseEntity<StreetArt> addStreetArt(@RequestBody StreetArt streetArt){
 
 
-       return streetArtService.saveStreetARt(streetArt);
+       return new ResponseEntity<>(streetArtService.saveStreetARt(streetArt), HttpStatus.OK);
     }
     //put mapping should be maby implemented not sure rn
 
-    //DELETE maby later
+    //DELETE
+    @DeleteMapping("api/v1/art/delete/{id}")
+    public ResponseEntity<Long> deleteStreetArt(@PathVariable Long id){
+
+        streetArtService.deleteStreetArt(id);
+
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
 
 }

@@ -1,4 +1,4 @@
-package discover.streetart.stree.main.customExceptions;
+package discover.streetart.main.customExceptions;
 
 public class StreetArtNotFoundException extends RuntimeException {
 

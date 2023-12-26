@@ -1,9 +1,9 @@
-package discover.streetart.stree.main.service;
+package discover.streetart.main.service;
 
-import discover.streetart.stree.main.domain.Comments;
-import discover.streetart.stree.main.domain.StreetArt;
-import discover.streetart.stree.main.repositery.CommentRepositery;
-import discover.streetart.stree.main.repositery.StreetArtRepositery;
+import discover.streetart.main.domain.Comments;
+import discover.streetart.main.domain.StreetArt;
+import discover.streetart.main.repositery.CommentRepositery;
+import discover.streetart.main.repositery.StreetArtRepositery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +26,11 @@ public class StreetArtService {
 
     public StreetArt saveStreetARt( StreetArt streetArt){
          return streetArtRepositery.save(streetArt);
+    }
+
+    public void deleteStreetArt(Long id){
+
+        streetArtRepositery.deleteById(id);
     }
 
 

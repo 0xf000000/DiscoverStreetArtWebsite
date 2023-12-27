@@ -13,7 +13,7 @@ public class HomeController {
         return "index";
     }
     // upload Page
-    @RequestMapping("/Upload")
+    @RequestMapping("/upload")
     public String upload(){
         return "upload";
     }

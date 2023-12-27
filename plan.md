@@ -24,9 +24,7 @@ eine Moeglichkeit narchichten zu speichern
 PAGES
 
 /Landing Page ( sollte einen Call to Action haben, und vielleicht eine kleine Slideshow, die die neusten bilder anzeigt.
-/Login
 /register
-/Logout
 /map
 /Blog
 /upload
@@ -78,10 +76,11 @@ i would use spring security for developing this kind of handeling
 so the deleteUser and addUser endpoints would fall appart
 
 
+# SPRING SECURITY TASKS
 
 
-
-
+- /upload muss einen Login brauchen
+- die möglichkeit kommentare zu schreiben darf nur von USERN performt werden
 
 
 

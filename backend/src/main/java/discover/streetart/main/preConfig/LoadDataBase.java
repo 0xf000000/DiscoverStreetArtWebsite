@@ -3,8 +3,10 @@ package discover.streetart.main.preConfig;
 
 import discover.streetart.main.domain.Comments;
 import discover.streetart.main.domain.StreetArt;
+import discover.streetart.main.domain.User;
 import discover.streetart.main.repositery.CommentRepositery;
 import discover.streetart.main.repositery.StreetArtRepositery;
+import discover.streetart.main.repositery.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -24,7 +26,7 @@ public class LoadDataBase {
      * @return
      */
     @Bean
-    CommandLineRunner initDatabase(StreetArtRepositery streetArtRepositery, CommentRepositery commentRepositery){
+    CommandLineRunner initDatabase(StreetArtRepositery streetArtRepositery, CommentRepositery commentRepositery, UserRepository userRepository){
 
         return args -> {
             StreetArt artpoint1 = new StreetArt((float) 2000, "DKDKA", "base64","2023","john travolta", "description", new Timestamp(2023));
@@ -33,7 +35,8 @@ public class LoadDataBase {
             log.info("Preloading: " + streetArtRepositery.save(new StreetArt((float) 8423, "COCLCOL", "base64","2023","john travolta", "description", new Timestamp(2023))) );
             log.info("Preloading: " + commentRepositery.save(new Comments("woow thats a really cool streetArt3", "john", artpoint1, new Timestamp(2023))));
             log.info("Preloading: " + commentRepositery.save(new Comments("sssssss", "john", artpoint1, new Timestamp(2023))));
-
+            log.info("Preloading: " + userRepository.save(new User("test", "test", "test@mail.com", "USER")) + "");
+            log.info(userRepository.findUserByEmail("test@mail.com").getEmail());
             log.info("SETUP FINISHED TO SEE PLEASE VISIT 'http://localhost:8080/'");
         };
 

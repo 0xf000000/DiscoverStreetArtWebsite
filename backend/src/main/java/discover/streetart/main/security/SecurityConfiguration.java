@@ -23,18 +23,7 @@ public class SecurityConfiguration {
 
 
     // test user
-    @Bean
-   public InMemoryUserDetailsManager userDetailsManager(){
 
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("foo")
-                .password("foo")
-                .roles("USER")
-                .build();
-
-
-        return new InMemoryUserDetailsManager(user);
-   }
 
     // NOTE: delete this only for test purposes
 
@@ -46,9 +35,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests().requestMatchers("/upload").authenticated()
                 .requestMatchers("/**").permitAll()
                 .and()
-                .formLogin().and().authenticationProvider()
+                .formLogin();
 
-                .httpBasic();
+
 
         return http.build();
 

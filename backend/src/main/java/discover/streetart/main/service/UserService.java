@@ -29,6 +29,10 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUserByUsername(String username){
+
+        if ( username == null || username.equals("")){
+            return null;
+        }
         return userRepository.findUserByUsername(username);
 
     }

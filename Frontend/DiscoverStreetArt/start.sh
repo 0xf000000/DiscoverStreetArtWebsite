@@ -15,8 +15,8 @@ if [ $exitCode -ne 0  ]; then
 fi;
 
 # moving the newly produced files into the backend rootdir
-mv ./dist/*.html ../../backend/src/main/resources/templates 
-mv ./dist/assets/* ../../backend/src/main/resources/static/assets
+cp ./dist/*.html ../../backend/src/main/resources/templates
+cp ./dist/assets/* ../../backend/src/main/resources/static/assets
 
 echo "checking if java is installed"
 if type -p java; then 
@@ -24,6 +24,7 @@ echo "found java executable!"
 
 else 
  echo "no java please install java in order to start the backend!"
+ exit;
 fi 
 
 

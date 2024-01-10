@@ -15,6 +15,10 @@ import org.springframework.context.annotation.Configuration;
 
 import java.sql.Timestamp;
 
+/**
+ * just a subclass for testing purposes the got some data in our application and a testuser
+ */
+
 @Configuration
 public class LoadDataBase {
     private static final Logger log = LoggerFactory.getLogger(LoadDataBase.class);
@@ -28,6 +32,10 @@ public class LoadDataBase {
     @Bean
     CommandLineRunner initDatabase(StreetArtRepositery streetArtRepositery, CommentRepositery commentRepositery, UserRepository userRepository){
 
+        // password is set to 'test' its just in btcrypt hash form cause otherwise we can auth
+        String passwordHash = "$2y$10$ujIHAAj0Q1I/Y9nSWV4Gr.obBcmFmXn0.snSBefbGeXq9G.62K/GG";
+
+
         return args -> {
             StreetArt artpoint1 = new StreetArt((float) 2000, "DKDKA", "base64","2023","john travolta", "description", new Timestamp(2023));
             log.info("Preloading: " + streetArtRepositery.save(artpoint1));
@@ -35,10 +43,9 @@ public class LoadDataBase {
             log.info("Preloading: " + streetArtRepositery.save(new StreetArt((float) 8423, "COCLCOL", "base64","2023","john travolta", "description", new Timestamp(2023))) );
             log.info("Preloading: " + commentRepositery.save(new Comments("woow thats a really cool streetArt3", "john", artpoint1, new Timestamp(2023))));
             log.info("Preloading: " + commentRepositery.save(new Comments("sssssss", "john", artpoint1, new Timestamp(2023))));
-            log.info("Preloading: " + userRepository.save(new User("test", "test", "test@mail.com", "USER")) + "");
+            log.info("Preloading: " + userRepository.save(new User("test", passwordHash , "test@mail.com")) + "");
             log.info(userRepository.findUserByEmail("test@mail.com").getEmail());
             log.info("SETUP FINISHED TO SEE PLEASE VISIT 'http://localhost:8080/'");
         };
-
     }
 }

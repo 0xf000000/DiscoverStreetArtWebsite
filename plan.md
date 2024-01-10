@@ -82,6 +82,10 @@ so the deleteUser and addUser endpoints would fall appart
 - /upload muss einen Login brauchen
 - die möglichkeit kommentare zu schreiben darf nur von USERN performt werden
 
+# TASKS
+
+1- FINISH SECURITY IMPLEMENTATION
+2. BUILD BACKEND and data visualisation
 
 
 

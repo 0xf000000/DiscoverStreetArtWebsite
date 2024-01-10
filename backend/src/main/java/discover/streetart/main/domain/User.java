@@ -25,11 +25,12 @@ import java.util.List;
 public class User implements UserDetails {
 
 
-    public User(String Username, String password, String Email, String Role){
+    public User(String Username, String password, String Email){
         this.username = Username;
         this.password = password;
         this.email = Email;
-        this.role =  Role;
+        this.enabled = false;
+        this.role = Role.USER;
 
     }
     @Column(name = "UserID")
@@ -37,6 +38,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @Column(name =  "enabled")
+    private boolean enabled;
 
 
     @NonNull

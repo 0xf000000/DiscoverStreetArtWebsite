@@ -31,10 +31,10 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") UserRegestrationDto userRegestrationDto, HttpServletRequest httpServletRequest, Errors errors){
-       try{
+
            userService.save(userRegestrationDto);
 
-       }catch ()
+
 
         return "redirect:/registration?success";
     }

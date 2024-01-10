@@ -1,5 +1,6 @@
 package discover.streetart.main.service;
 
+import discover.streetart.main.customExceptions.userAlereadyExistsException;
 import discover.streetart.main.domain.Role;
 import discover.streetart.main.domain.User;
 import discover.streetart.main.repositery.UserRepository;
@@ -53,13 +54,19 @@ public class UserService implements IUserService {
 
     // basic impl of save method i should make the validation client side?
     @Override
-    public User save(UserRegestrationDto userRegestrationDto){
+    public User save(UserRegestrationDto userRegestrationDto) throws userAlereadyExistsException {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+         User user = userRepository.findUserByEmail(userRegestrationDto.getEmail());
 
+        if( user != null){
+            final String errorMessage = "USER ALEREADY EXITS";
+            throw new  userAlereadyExistsException(errorMessage);
 
-        User user = new User(userRegestrationDto.getUsername(), encoder.encode(userRegestrationDto.getPassword()), userRegestrationDto.getEmail() );
+        }
 
-        return userRepository.save(user);
+        User newUser = new User(userRegestrationDto.getUsername(), encoder.encode(userRegestrationDto.getPassword()), userRegestrationDto.getEmail() );
+
+        return userRepository.save(newUser);
     }
 
 

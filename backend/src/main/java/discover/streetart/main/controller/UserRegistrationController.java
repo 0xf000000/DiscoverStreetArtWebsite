@@ -1,12 +1,17 @@
 package discover.streetart.main.controller;
 
+import discover.streetart.main.customExceptions.userAlereadyExistsException;
+import discover.streetart.main.domain.User;
+import discover.streetart.main.event.OnRegistrationCompleteEvent;
 import discover.streetart.main.service.UserService;
 import discover.streetart.main.web.dto.UserRegestrationDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/registration")
@@ -14,6 +19,8 @@ public class UserRegistrationController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
     public UserRegistrationController(){
         super();
     }
@@ -31,12 +38,28 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") UserRegestrationDto userRegestrationDto, HttpServletRequest httpServletRequest, Errors errors){
+            try{
+                String appUrl = httpServletRequest.getContextPath();
 
-           userService.save(userRegestrationDto);
+                User user = userService.save(userRegestrationDto);
+
+                eventPublisher.publishEvent( new OnRegistrationCompleteEvent( appUrl, httpServletRequest.getLocale(), user));
+
+
+            }catch(userAlereadyExistsException e ){
+
+                return "redirect:registration?error";
+
+            }catch(RuntimeException exception ){
+                return "redirect:registration?error";
+            }
 
 
 
-        return "redirect:/registration?success";
+
+
+
+            return "redirect:registration?success";
     }
 
 }

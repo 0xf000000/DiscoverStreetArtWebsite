@@ -1,10 +1,17 @@
 package discover.streetart.main.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
+
+@Getter
+@Setter
+@NoArgsConstructor
 
 public class VerifycationToken {
 
@@ -22,11 +29,5 @@ public class VerifycationToken {
 
     private Date expiryDate;
 
-    private Date calculateExpiryDate(int expiryTimeInMinutes){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Timestamp(cal.getTime().getTime()));
-        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
-        return new Date(cal.getTime().getTime());
 
-    }
 }

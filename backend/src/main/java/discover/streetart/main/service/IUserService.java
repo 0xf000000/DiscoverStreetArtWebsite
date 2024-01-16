@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public interface IUserService extends UserDetailsService {
     User save(UserRegestrationDto userRegestrationDto) throws userAlereadyExistsException;
 
+    void setAuthToken( User user, String token);
 
 
 }

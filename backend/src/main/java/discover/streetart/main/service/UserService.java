@@ -3,7 +3,9 @@ package discover.streetart.main.service;
 import discover.streetart.main.customExceptions.userAlereadyExistsException;
 import discover.streetart.main.domain.Role;
 import discover.streetart.main.domain.User;
+import discover.streetart.main.domain.VerifycationToken;
 import discover.streetart.main.repositery.UserRepository;
+import discover.streetart.main.repositery.VerifycationTokenRepositery;
 import discover.streetart.main.security.SecurityConfiguration;
 import discover.streetart.main.web.dto.UserRegestrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +16,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Timestamp;
+import java.util.*;
 
 @Service
 public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
-
-
+    @Autowired
+    private VerifycationTokenRepositery tokenRepositery;
 
     public Optional<User> getUserByID(Long id){
         return userRepository.findById(id);
@@ -51,6 +52,19 @@ public class UserService implements IUserService {
 
     }
 
+    /**
+     * calculates expiryDate for the auth token to authenticate as a User
+     * @param expiryTimeInMinutes Integer should pass it in minutes
+     * @return
+     */
+    private Date calculateExpiryDate(int expiryTimeInMinutes){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Timestamp(cal.getTime().getTime()));
+        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
+        return new Date(cal.getTime().getTime());
+
+    }
+
 
     // basic impl of save method i should make the validation client side?
     @Override
@@ -67,6 +81,18 @@ public class UserService implements IUserService {
         User newUser = new User(userRegestrationDto.getUsername(), encoder.encode(userRegestrationDto.getPassword()), userRegestrationDto.getEmail() );
 
         return userRepository.save(newUser);
+    }
+
+    @Override
+    public void setAuthToken(User user, String token) {
+        VerifycationToken newToken = new VerifycationToken();
+        final int expiryDateInMinutes = 2880;
+        final Date expiryDate = calculateExpiryDate(expiryDateInMinutes);
+        newToken.setToken(token);
+        newToken.setUser(user);
+        newToken.setExpiryDate(expiryDate);
+
+        tokenRepositery.save(newToken);
     }
 
 

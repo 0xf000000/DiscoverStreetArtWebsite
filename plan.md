@@ -32,8 +32,7 @@ PAGES
 
 DATABASE STRUCTS
 
-TABLE1 = USER( username, password(hash), salt, userID, emailAddress(we could here think about encrypting),  
-
+TABLE1 USER( username, password, email) 
 
 TABLE2= StreetArtPoints( Geolocation, picture, creation, artist, description, ArtID PRIMARY KEY)
 
@@ -62,8 +61,9 @@ GET api/v1/comments/{$1}
 POST api/v1/comments
 
 
-// not sure rn how we want the put mapping
-PUT mapping
+
+
+DELETE -> api/v1/art/{$1}
 
 
 

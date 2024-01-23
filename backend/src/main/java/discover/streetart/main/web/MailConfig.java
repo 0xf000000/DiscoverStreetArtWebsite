@@ -22,7 +22,7 @@ public class MailConfig {
         mailSender.setPort(25);
 
         // here muss meine Gmail Discovery EmailAddresse hin
-        mailSender.setUsername("info@mail.vps2364072.servdiscount-customer.com");
+        mailSender.setUsername("info");
         mailSender.setPassword("info");
 
 

@@ -53,6 +53,18 @@ public class UserService implements IUserService {
     }
 
     /**
+     * checks if we have a corresponding token in our database
+     * @param token
+     * @return
+     */
+    public VerifycationToken findByToken(String token){
+
+
+       return tokenRepositery.findByToken(token);
+
+    }
+
+    /**
      * calculates expiryDate for the auth token to authenticate as a User
      * @param expiryTimeInMinutes Integer should pass it in minutes
      * @return
@@ -68,7 +80,7 @@ public class UserService implements IUserService {
 
     // basic impl of save method i should make the validation client side?
     @Override
-    public User save(UserRegestrationDto userRegestrationDto) throws userAlereadyExistsException {
+    public User RegisterNewAccount(UserRegestrationDto userRegestrationDto) throws userAlereadyExistsException {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
          User user = userRepository.findUserByEmail(userRegestrationDto.getEmail());
 
@@ -81,6 +93,15 @@ public class UserService implements IUserService {
         User newUser = new User(userRegestrationDto.getUsername(), encoder.encode(userRegestrationDto.getPassword()), userRegestrationDto.getEmail() );
 
         return userRepository.save(newUser);
+    }
+
+    /**
+     * saves a aleready registered User to the database with his confirmation activation
+     * @param user
+     * @return
+     */
+    public User saveRegisteredUser( User user){
+        return userRepository.save(user);
     }
 
     @Override
@@ -99,6 +120,16 @@ public class UserService implements IUserService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = getUserbyemail(email);
+
+        if( user == null){
+            throw new UsernameNotFoundException("username doesnt exists in database");
+        }
+
+        if(!user.isEnabled()){
+            throw new UsernameNotFoundException("please confirm your identity with your email adress");
+        }
+
+
         List<Role> roles = Arrays.asList(user.getRole());
         UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
                 .username(user.getEmail())

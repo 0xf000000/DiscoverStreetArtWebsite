@@ -41,7 +41,7 @@ public class SecurityConfiguration {
 
         http.csrf().disable().cors().disable()
 
-                .authorizeHttpRequests().requestMatchers("/upload", "/").hasAnyRole("USER", "ADMIN")
+                .authorizeHttpRequests().requestMatchers("/upload").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/**").permitAll()
                 .and()
                 .formLogin()

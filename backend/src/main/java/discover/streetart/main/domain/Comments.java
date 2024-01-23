@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Table(name = "comments")
 @Getter
 @Setter
-@NoArgsConstructor
+
 public class Comments {
 
     // CONSTRUCTORS

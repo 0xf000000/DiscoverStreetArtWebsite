@@ -36,6 +36,15 @@ public class UserRegistrationController {
     }
 
 
+@GetMapping("/confirm" )
+public String registrationCompleteEvent( @PathVariable String token){
+        System.out.println(token);
+
+        return "registration";
+
+}
+
+
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") UserRegestrationDto userRegestrationDto, HttpServletRequest httpServletRequest, Errors errors){
             try{
@@ -46,19 +55,9 @@ public class UserRegistrationController {
                 eventPublisher.publishEvent( new OnRegistrationCompleteEvent( appUrl, httpServletRequest.getLocale(), user));
 
 
-            }catch(userAlereadyExistsException e ){
-
-                return "redirect:registration?error";
-
-            }catch(RuntimeException exception ){
+            }catch(userAlereadyExistsException | RuntimeException e ){
                 return "redirect:registration?error";
             }
-
-
-
-
-
-
             return "redirect:registration?success";
     }
 

@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 
 public class StreeApplication {
-
+  
 	private Logger logger = LoggerFactory.getLogger(StreeApplication.class);
-
+  
 	public static void main(String[] args) {
 		SpringApplication.run(StreeApplication.class, args);
 	}

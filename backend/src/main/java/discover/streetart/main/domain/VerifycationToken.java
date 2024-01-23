@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-
+@Entity
 public class VerifycationToken {
 
     private static final int EXPIRATION = 60 * 24;

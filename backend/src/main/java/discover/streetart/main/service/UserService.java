@@ -120,13 +120,15 @@ public class UserService implements IUserService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = getUserbyemail(email);
-
+        boolean enabled = user.isEnabled();
         if( user == null){
             throw new UsernameNotFoundException("username doesnt exists in database");
         }
 
-        if(!user.isEnabled()){
+        if(!enabled){
+
             throw new UsernameNotFoundException("please confirm your identity with your email adress");
+
         }
 
 

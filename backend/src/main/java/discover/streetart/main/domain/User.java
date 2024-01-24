@@ -29,8 +29,8 @@ public class User implements UserDetails {
         this.username = Username;
         this.password = password;
         this.email = Email;
-        this.enabled = false;
         this.role = Role.USER;
+        this.setEnabled(false);
 
     }
     @Column(name = "UserID")
@@ -88,6 +88,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enabled;
     }
 }

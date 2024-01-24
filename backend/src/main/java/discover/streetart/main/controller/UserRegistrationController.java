@@ -50,7 +50,7 @@ public String registrationCompleteEvent( @RequestParam("token") String token, We
         // if token doesnt exist in database, we just return a error page when u try to visit this endpoint
         if(requestToken == null){
 
-            return "registration";
+            return "registration?error";
         }
 
        User user =  requestToken.getUser();
@@ -61,13 +61,15 @@ public String registrationCompleteEvent( @RequestParam("token") String token, We
             return "confirm?error=tokenIsSadlyExpired";
         }
 
+
+
         user.setEnabled(true);
 
         userService.saveRegisteredUser(user);
 
 
 
-        return "registration";
+        return "login";
 
 }
 
@@ -78,11 +80,11 @@ public String registrationCompleteEvent( @RequestParam("token") String token, We
                 String appUrl = httpServletRequest.getContextPath();
 
                 User user = userService.RegisterNewAccount(userRegestrationDto);
-
                 eventPublisher.publishEvent( new OnRegistrationCompleteEvent( appUrl, httpServletRequest.getLocale(), user));
 
 
             }catch(userAlereadyExistsException | RuntimeException e ){
+                System.out.println(e.fillInStackTrace());
                 return "redirect:registration?error";
             }
             return "redirect:registration?success";

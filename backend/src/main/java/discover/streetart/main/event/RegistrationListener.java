@@ -48,7 +48,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         // this is messy would create a extra method
         final String RECIVER_ADRESS = user.getEmail();
         final String subject = "Registration Conformation DiscoverStreetArt";
-        final String REGISTRATION_ROUTE = "/registrationConfirm?token=";
+        final String REGISTRATION_ROUTE = "/registration/confirm?token=";
         stringBuilder.append(event.getAppUrl());
         stringBuilder.append(REGISTRATION_ROUTE);
         stringBuilder.append(token);
@@ -56,12 +56,15 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
 
      //   userService. setUsertoken(User, token)
-        String message = messages.getMessage("message.regSucc", null, event.getLocale());
+       // String message = messages.getMessage("message.regSucc", null, event.getLocale());
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(RECIVER_ADRESS);
         email.setSubject(subject);
-        email.setText(message + "\r\n" + "http://localhost:8080" + confirmationUrl);
+        email.setText(" Hello new User, \n please visit the following link to verify your email address " + "\r\n" + "http://localhost:8080" + confirmationUrl);
         mailSender.send(email);
+
+
+
 
     }
 

@@ -17,12 +17,12 @@ public class MailConfig {
 
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("mail.vps2364072.servdiscount-customer.com");
-        mailSender.setPort(25);
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
 
         // here muss meine Gmail Discovery EmailAddresse hin
-        mailSender.setUsername("info");
-        mailSender.setPassword("info");
+        mailSender.setUsername("info.discoverstreetart@gmail.com");
+        mailSender.setPassword("anjb guwv nmms njgq");
 
 
         //ok doesnt rl work rn sadly but mabey later on otherwise we wil just use a gmail address to make things way more easy

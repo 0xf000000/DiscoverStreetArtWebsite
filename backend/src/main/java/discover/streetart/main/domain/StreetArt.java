@@ -18,9 +18,9 @@ import java.util.List;
 public class StreetArt {
 
     // CONSTRUCTORS
-    public StreetArt( Float geolocation, String pictureName, String base64_picture, String creationDate, String artist, String desc, Timestamp date ){
+    public StreetArt( Float geolocation, String pictureName, String picturePointer, String creationDate, String artist, String desc, Timestamp date ){
         this.artist = artist;
-        this.base64_picture = base64_picture;
+        this.picturePointer = picturePointer;
         this.Geolocation = geolocation;
         this.description = desc;
         this.picture_Name = pictureName;
@@ -37,11 +37,16 @@ public class StreetArt {
     private Long streetArtId;
     private Float Geolocation;
     private String picture_Name;
-    private String base64_picture;
+
+    // we will use some kind of pointer here not storing the raw picture in the DB
+    private String picturePointer;
     private String creationDate;
     private String artist;
     private String description;
     private Timestamp date;
+
+    // we need to save which user posted which streetArtPoint ?? do we?
+
 
     @OneToMany(mappedBy = "streetArt", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comments> comments = new ArrayList<>();

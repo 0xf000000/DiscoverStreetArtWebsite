@@ -14,10 +14,7 @@ public class HomeController {
         return "index";
     }
     // upload Page
-    @RequestMapping("/upload")
-    public String upload(){
-        return "upload";
-    }
+
 
 
     // login Page

@@ -34,7 +34,7 @@ public class StreetArtController {
     }
 
     //Post
-    @PostMapping( value = "api/v1/streetArt", consumes = "application/json;utf-8")
+    @PostMapping( value = "/api/v1/streetArt", consumes = "application/json;utf-8")
     ResponseEntity<StreetArt> addStreetArt(@RequestBody StreetArt streetArt){
 
 
@@ -42,8 +42,8 @@ public class StreetArtController {
     }
     //put mapping should be maby implemented not sure rn
 
-    //DELETE
-    @DeleteMapping("api/v1/art/delete/{id}")
+    //DELETE not sure we will implement this here
+    @DeleteMapping("/api/v1/art/delete/{id}")
     public ResponseEntity<Long> deleteStreetArt(@PathVariable Long id){
 
         streetArtService.deleteStreetArt(id);

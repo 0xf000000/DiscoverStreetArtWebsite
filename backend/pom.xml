@@ -20,7 +20,7 @@
 	</properties>
 	<dependencies>
 
-
+		<!-- https://mvnrepository.com/artifact/javax.activation/com.springsource.javax.activation -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

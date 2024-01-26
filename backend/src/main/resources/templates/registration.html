@@ -36,12 +36,7 @@
 
             <!-- success message -->
             <div th:if="${param.success}">
-                <div class="alert alert-info"> okay bitte verifiziere deine Email Adresse befor du dich anmeldest!</div>
-            </div>
-
-            <div th:if="${param.error}">
-
-                <div class=" alert alert-warning">  sorry es ist etwas schief gelaufen mit deiner registrierung :( </div>
+                <div class="alert alert-info"> okay du musst deine email addresse bestätigen befor du dich anmelden kannst!</div>
             </div>
 
             <h1>Registration</h1>
@@ -52,6 +47,8 @@
                     <input id="firstName" class="form-control" th:field="*{username}"
                            required autofocus="autofocus" />
                 </div>
+
+
 
                 <div class="form-group">
                     <label class="control-label" for="email"> Email </label> <input

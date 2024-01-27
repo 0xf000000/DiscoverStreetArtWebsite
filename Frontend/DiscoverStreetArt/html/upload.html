@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,6 +8,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
+            <link href="./css/upload.css" rel="stylesheet">
 </head>
 <body>
     <h1> Upload</h1>
@@ -15,7 +16,10 @@
     <div> name </div>
     <div> artist</div>
     <div> description</div>
+        <div sec:authorize="hasRole('USER')">Text visible to user.</div>
+        <div sec:authorize="isAuthenticated()">Text visible only to authenticated users.</div>
 
+        <div sec:authentication="username"></div>
     <div class="uploadContainer">
         <div class="error" style="display:none">
             <div class="alert alert-danger"> something went wrong with uploading please try again :</div>
@@ -26,8 +30,11 @@
         </div>
 
         <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
-            <div class="form-group">
-                <input type="file" name="image" accept="image/*" class="form-control-file">
+            <div class="form-group ">
+                <input name ="pictureName" class="form-control">
+                <input name="location" type="text" class="form-control" placeholder="longLat">
+                <input name="artist" class="form-control" placeholder="artist">
+                <input type="file" name="image" accept="image/*" class="form-control-file " id="pictureInput">
             </div>
             <button type="submit" disabled="true" class="btn btn-primary">Upload image</button>
         </form>

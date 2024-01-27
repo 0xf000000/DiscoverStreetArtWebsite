@@ -18,10 +18,11 @@ import java.util.List;
 public class StreetArt {
 
     // CONSTRUCTORS
-    public StreetArt( Float geolocation, String pictureName, String picturePointer, String creationDate, String artist, String desc, Timestamp date ){
+    public StreetArt( Float Longitude, Float Latitude, String pictureName, String picturePointer, String creationDate, String artist, String desc, Timestamp date ){
         this.artist = artist;
         this.picturePointer = picturePointer;
-        this.Geolocation = geolocation;
+        this.Latitude = Latitude;
+        this.Longitude = Longitude;
         this.description = desc;
         this.picture_Name = pictureName;
         this.date = date;
@@ -35,7 +36,9 @@ public class StreetArt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long streetArtId;
-    private Float Geolocation;
+    private Float  Latitude;
+
+    private Float Longitude;
     private String picture_Name;
 
     // we will use some kind of pointer here not storing the raw picture in the DB

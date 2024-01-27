@@ -41,7 +41,7 @@ public class SecurityConfiguration {
 
         http.csrf().disable().cors().disable()
 
-                .authorizeHttpRequests().requestMatchers( "api/v1/streetArt", "api/v1/art/delete/{id}", "api/v1/comments").hasAnyRole("USER", "ADMIN")
+                .authorizeHttpRequests().requestMatchers("/upload", "api/v1/streetArt", "api/v1/art/delete/{id}", "api/v1/comments").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/**").permitAll()
                 .and()
                 .formLogin()

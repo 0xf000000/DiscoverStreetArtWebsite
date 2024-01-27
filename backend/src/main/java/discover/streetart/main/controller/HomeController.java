@@ -24,7 +24,7 @@ public class HomeController {
     }
 
     //map Page
-    @RequestMapping("/Map")
+    @RequestMapping("/map")
     public String map(){ return "map"; }
 
 

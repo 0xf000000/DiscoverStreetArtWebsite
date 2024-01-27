@@ -1,6 +1,6 @@
 const form = document.querySelector("form");
 const APIURL = "api/v1/upload";
-const fileInput = document.querySelector('input');
+const fileInput = document.getElementById("pictureInput")
 
 const submitButton = document.querySelector('button');
 form.addEventListener("submit", handleSubmit);
@@ -10,7 +10,7 @@ fileInput.addEventListener("change", handleInputChange)
 // handles the default behaviours of the form tag element
 function handleSubmit(event){
   event.preventDefault();
-  // uploadImage(); 
+  uploadImage(); 
 }
 
 
@@ -59,11 +59,12 @@ function handleInputChange(){
       assertFileIsValid(fileInput.files);
     } catch (err) {
       // need to change that here just asserting that this works rn 
-     alert("no valid iput file!");
+      alert("no valid iput file!");
        submitButton.disabled = true;
       return;
       }
 
+     
       submitButton.disabled = false;
 }
 
@@ -87,3 +88,14 @@ function assertFileIsValid(fileList){
 }
 
 
+const successCallback = (position) => {
+   console.log(position.coords);
+ };
+ 
+ const errorCallback = (error) => {
+   console.log("SSS");
+   console.log(error);
+ };
+ 
+navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+ 

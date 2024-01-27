@@ -26,10 +26,9 @@ PAGES
 /Landing Page ( sollte einen Call to Action haben, und vielleicht eine kleine Slideshow, die die neusten bilder anzeigt.
 /register
 /map
-/Blog
 /upload
-/members
-
+/Blog 
+/members // ist vielleicht zu viel, da dies unsere arbeit um einiges erschschwären würde
 DATABASE STRUCTS
 
 TABLE1 USER( username, password, email) 

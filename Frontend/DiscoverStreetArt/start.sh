@@ -8,7 +8,7 @@ echo "OKAY BUILDING RELEASE VERSIONS FROM FRONTEND";
 
 # moving the newly produced files into the backend rootdir
 cp ./html/*.html ../../backend/src/main/resources/templates
-cp ./html/css/*.css  ../../backend/src/main/resources/static/assets
+cp ./html/css/*.css  ../../backend/src/main/resources/static/css
 cp ./html/js/*.js ../../backend/src/main/resources/static/js
 echo "checking if java is installed"
 if type -p java; then 

@@ -123,14 +123,47 @@ function assertFileIsValid(fileList){
 }
 
 
-const successCallback = (position) => {
-   console.log(position.coords);
+const LOCATION_BUTTON = document.getElementById("locationButton")
+LOCATION_BUTTON.addEventListener("click", getLocation )
+
+function getLocation(){
+
+   navigator.geolocation.getCurrentPosition(successPosition, errorCallback);
+
+
+}
+
+const successPosition = (position) => {
+
+   const Long = position.coords.longitude;
+   const lat = position.coords.latitude 
+   const locatioField = document.getElementById("locationDataField");
+
+   locatioField.value = `${Long} long and ${lat}`
+   
  };
  
+
  const errorCallback = (error) => {
-   console.log("SSS");
-   console.log(error);
+  alert("could not retrieve Location user denied request");
  };
+
+
+ // MAP 
+
+ var map = L.map('map').setView({lon:6.960701 , lat:50.937066}, 13);
+
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+      }).addTo(map);
  
-navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+function onMapClick(e){
+
+   alert("you clicked the map at " + e.latlng);
+}
+
+map.on("click", onMapClick);
+
  

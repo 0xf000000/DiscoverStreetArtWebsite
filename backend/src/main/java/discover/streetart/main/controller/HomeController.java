@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     // returns Index Page
-    @RequestMapping("/")
+    @GetMapping("/")
     public String home(){
         return "index";
     }
     // upload Page
 
+    // just simply gets the html page that gives us the file
+    @GetMapping("/upload")
+    public String upload(){
+        return "upload";
+    }
 
 
     // login Page
@@ -24,7 +29,7 @@ public class HomeController {
     }
 
     //map Page
-    @RequestMapping("/map")
+    @GetMapping("/map")
     public String map(){ return "map"; }
 
 

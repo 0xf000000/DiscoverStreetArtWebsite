@@ -1,8 +1,8 @@
-const form = document.querySelector("form");
+const form = document.querySelector("#pictureForm");
 const APIURL = "api/v1/upload";
 const fileInput = document.getElementById("pictureInput")
 
-const submitButton = document.querySelector('button');
+const submitButton = document.querySelector('#submitPicture');
 form.addEventListener("submit", handleSubmit);
 
 fileInput.addEventListener("change", handleInputChange)
@@ -10,7 +10,12 @@ fileInput.addEventListener("change", handleInputChange)
 // handles the default behaviours of the form tag element
 function handleSubmit(event){
   event.preventDefault();
-  uploadImage(); 
+ let statusCode =  uploadImage(); 
+
+ if (statusCode == 200 ){
+
+      UploadArtPointData();
+ }
 }
 
 
@@ -18,6 +23,7 @@ function handleSubmit(event){
 // handles the immage Upload to the server
 
 async function uploadImage(){
+   
  const url = "http://localhost:8080/api/v1/upload"
  const method = "POST"
  const formData = new FormData(form);
@@ -34,21 +40,48 @@ async function uploadImage(){
    showAlertSigns(statusCode);
 
 
-   
+   return statusCode;
 }
 
 
 
 function showAlertSigns( statusCode){
-   if( statusCode === 200){
-      let succsess = document.querySelector(".sucsess");
-      succsess.style.display ="block";
+   let message = document.querySelector(".statusMessage");
+   let STATUS = document.createElement("div");
+   switch(statusCode){
+      case 200: 
+
+      STATUS.classList.add("alert");
+      STATUS.classList.add("alert-info");
+      STATUS.innerText = "image succsessfully uploaded!"
+      message.appendChild(STATUS);
+      message.style.display = "block";
+      break;
+
+
+
+
+      case 500 : 
+      STATUS.classList.add("alert");
+      STATUS.classList.add("alert-warning");
+      STATUS.innerText = "i am sorry something went wrong with uploading the immage please try again"
+      message.appendChild(STATUS);
+      message.style.display = "block";
+
+      break;
+      case 400: 
+      STATUS.classList.add("alert");
+      STATUS.classList.add("alert-warning");
+      STATUS.innerText = "are you sure this is an immage file? Please try again!"
+      message.appendChild(STATUS);
+      message.style.display = "block";
+
+      break;
+
+      
+
    }
 
-   else{
-      let error = document.querySelector(".error");
-      error.style.display ="block";
-   }
 }
 
 
@@ -57,6 +90,7 @@ function handleInputChange(){
    try {
       
       assertFileIsValid(fileInput.files);
+     
     } catch (err) {
       // need to change that here just asserting that this works rn 
       alert("no valid iput file!");
@@ -64,6 +98,7 @@ function handleInputChange(){
       return;
       }
 
+     
      
       submitButton.disabled = false;
 }

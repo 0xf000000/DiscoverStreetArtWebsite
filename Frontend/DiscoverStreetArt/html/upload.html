@@ -13,30 +13,44 @@
 <body>
     <h1> Upload</h1>
 
-    <div> name </div>
-    <div> artist</div>
-    <div> description</div>
-        <div sec:authorize="hasRole('USER')">Text visible to user.</div>
-        <div sec:authorize="isAuthenticated()">Text visible only to authenticated users.</div>
 
-        <div sec:authentication="username"></div>
+      <!--  <div sec:authentication="username"></div>-->
     <div class="uploadContainer">
-        <div class="error" style="display:none">
-            <div class="alert alert-danger"> something went wrong with uploading please try again :</div>
+
+        <div class="statusMessage" style="display:none">     </div>
+
+      <!-- this form is for all the other data we want to upload long latitude usw-->  
+      <form method="post" th:action="@{/streetArt}" enctype="text/plain">
+        <div class="form-group" id="dataGROUP">
+          <label> name </label>
+          <input placeholder="name" type="text" class="form-data">
+          
+          <label> artist Label</label>
+          <input placeholder="artist name" type="text" class="form-data">
+
+          <label> description </label>
+          <input placeholder="description" type="text" class="form-data">
+          
+
+          <input placeholder="location" type="text" class="form-data">
+          <button type="button" class="btn-primary"> use your current location? </button>
+          
+          
+          <label> creation Date </label>
+          <input placeholder="creation Date" type="date" class="form-data">
         </div>
 
-        <div class="sucsess" style="display:none" >
-            <div class="alert alert-info"> good job it good uploaded:0</div>
-        </div>
 
-        <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+
+      </form>
+
+
+        <form id="pictureForm" method="post" th:action="@{/upload}" enctype="multipart/form-data">
             <div class="form-group ">
-                <input name ="pictureName" class="form-control">
-                <input name="location" type="text" class="form-control" placeholder="longLat">
-                <input name="artist" class="form-control" placeholder="artist">
+                
                 <input type="file" name="image" accept="image/*" class="form-control-file " id="pictureInput">
             </div>
-            <button type="submit" disabled="true" class="btn btn-primary">Upload image</button>
+            <button id="submitPicture" type="submit" disabled="true" class="btn btn-primary">Upload image</button>
         </form>
        
 

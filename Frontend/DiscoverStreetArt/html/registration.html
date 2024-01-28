@@ -36,8 +36,15 @@
 
             <!-- success message -->
             <div th:if="${param.success}">
-                <div class="alert alert-info"> okay du musst deine email addresse bestätigen befor du dich anmelden kannst!</div>
+                <div class="alert alert-info"> okay du musst deine email addresse bestï¿½tigen befor du dich anmelden kannst!</div>
             </div>
+
+          <div th:if="${param.error}">
+            
+            <div class="alert alert-warning" >  sorry diese Email Adresse ist bereits registriert </div>
+
+
+          </div>
 
             <h1>Registration</h1>
 

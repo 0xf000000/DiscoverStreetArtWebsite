@@ -2,6 +2,7 @@ package discover.streetart.main.controller;
 
 
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,31 +18,29 @@ import java.util.logging.Logger;
 @Controller
 public class FileUploader {
 
+final String PICTURE_DIR = "/Users/leon/code/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures/";
 
 
-    // just simply gets the html page that gives us the file
-    @GetMapping("/upload")
-    public String upload(){
-        return "upload";
-    }
 
     // we also should here validate that its a picture file and nothing else reallz important
     @PostMapping("api/v1/upload")
-    public String uploadFile(  Model model,@RequestParam("image") MultipartFile file ) {
+    public ResponseEntity<String> uploadFile(  @RequestParam("image") MultipartFile file ) {
 
         try{
             // here we need to change the paths, when we deploy to my server
-            // WE NEED TO ALSO POST A LOT OF OTHER STUFF HERE
-            file.transferTo(new File("/Users/leon/code/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures/" + file.getOriginalFilename()));
+            // small checkup so we validate this is an immage file
+           String contentType =  file.getContentType();
+           if(!(contentType.equals("image/jpeg") || contentType.equals("image/png"))){
+               return new ResponseEntity<>("uploaded File is not an Image", HttpStatus.BAD_REQUEST);
+           }
+
+            file.transferTo(new File( PICTURE_DIR + file.getOriginalFilename()));
 
         }catch(IOException e){
-            model.addAttribute("msg", "there was an issue with uploading the images to the Server please try again :(");
-            return "upload?success";
+            return new ResponseEntity<>("something went wrong server Internally", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        model.addAttribute("msg", "streetArt Succsessfully uploaded!");
-
-        return "upload";
+        return new ResponseEntity<>("image got successfully uploaded! fileName: " + file.getOriginalFilename(), HttpStatus.OK);
     }
 
 

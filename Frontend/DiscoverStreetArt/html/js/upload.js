@@ -1,35 +1,140 @@
+// CONST VARIABLES
 const form = document.querySelector("#pictureForm");
-const APIURL = "api/v1/upload";
-const fileInput = document.getElementById("pictureInput")
-
+const fileInput = document.getElementById("pictureInput");
+const INPUT_NAME = document.getElementById("name");
+const ARTIST_INPUT = document.getElementById("artist");
+const DESCRIPTION_INPUT = document.getElementById("description");
 const submitButton = document.querySelector('#submitPicture');
+const DATE_Input = document.getElementById("creationDate")
+const LOCATION_BUTTON = document.getElementById("locationButton");
+const LATITUDE_INPUT_FIELD = document.getElementById("longitude");
+const LONGITUDE_INPUT_FIELD = document.getElementById("latitude");
+const STREETART_DATA_FORM = document.getElementById("streetArtDATA");
+
+// GLOBAL SCOPE VARIABLES
+let UPLOADPOINTER = null;
+let upload_MARKER = null;
+
+
+// EVENT LISTENERS 
+INPUT_NAME.addEventListener("focusout", checkReqInput)
 form.addEventListener("submit", handleSubmit);
 
-fileInput.addEventListener("change", handleInputChange)
+fileInput.addEventListener("change", handleInputChange);
+LOCATION_BUTTON.addEventListener("click", getLocation );
 
-// handles the default behaviours of the form tag element
-function handleSubmit(event){
-  event.preventDefault();
- let statusCode =  uploadImage(); 
 
- if (statusCode == 200 ){
 
-      UploadArtPointData();
- }
+
+
+function checkReqInput(){
+  if(checkReqInputFields()){
+      displayErrorMessage("please provide a name to the streetArt :(", "alert-danger");
+  }
+
+  else{
+
+  try{
+    document.querySelector(".statusMessage").removeChild(document.querySelector(".alert"))
+  }
+  catch(error){
+    console.log(error);
+  }
+  }
+
+}
+
+function checkReqInputFields(){
+
+
+
+  return INPUT_NAME.value.trim() == "" || LONGITUDE_INPUT_FIELD.value.trim() == "";
+
 }
 
 
 
-// handles the immage Upload to the server
+// handles the default behaviours of the form tag element
+
+
+async function handleSubmit(event){
+  event.preventDefault();
+   let response = await uploadImage(); 
+
+     if( response.status == 200){
+      
+         let response =  await UploadArtPointData();
+        console.log(response);
+          
+         if(response != 200 ){
+
+            displayErrorMessage("there was a problem with uploading the streetartPoint data sorry please try again", "alert-warning" )
+         }
+         
+
+     }
+   
+      
+   
+     
+ 
+}
+
+function createResponseObject(){
+   var POST_REQUEST_ARTPOINT_DATA = {
+      picture_Name: "",
+       picturePointer: "",
+       creationDate: "",
+       artist: "",
+       description: "",
+       date:"",
+       comments: [],
+       latitude: 2,
+       longitude: 2
+   }
+   POST_REQUEST_ARTPOINT_DATA.picture_Name = INPUT_NAME.value;
+   POST_REQUEST_ARTPOINT_DATA.artist = ARTIST_INPUT.value
+   POST_REQUEST_ARTPOINT_DATA.description = DESCRIPTION_INPUT.value;
+   POST_REQUEST_ARTPOINT_DATA.creationDate = DATE_Input.value;
+   POST_REQUEST_ARTPOINT_DATA.date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+   POST_REQUEST_ARTPOINT_DATA.latitude = LATITUDE_INPUT_FIELD.value;
+   POST_REQUEST_ARTPOINT_DATA.longitude = LONGITUDE_INPUT_FIELD.value;
+   POST_REQUEST_ARTPOINT_DATA.picturePointer = UPLOADPOINTER;
+
+   return POST_REQUEST_ARTPOINT_DATA;
+}
+
+async function UploadArtPointData(){
+   const URL = "http://localhost:8080/api/v1/streetArt"
+   const method = "POST";
+
+  let BODY =  JSON.stringify( createResponseObject());
+    
+
+
+   const fetchOptions = { 
+      method: method,
+      body: BODY,
+      headers: { 'Content-Type': 'application/json' }
+   }
+
+   let response = await fetch(URL, fetchOptions);
+
+   const statusCode = await response.status;
+  return statusCode
+
+}
+
+// POST REQUESTS
 
 async function uploadImage(){
    
  const url = "http://localhost:8080/api/v1/upload"
- const method = "POST"
+ const method = "post"
  const formData = new FormData(form);
 
  const fetchOptions = {
-    method: "post",
+    method: method,
     body: formData
  }
 
@@ -39,43 +144,58 @@ async function uploadImage(){
 
    showAlertSigns(statusCode);
 
+   let responseStatusAndBody = {
+      status: response.status,
+      body : response.body
+   }
 
-   return statusCode;
+   return responseStatusAndBody;
+}
+
+function displayErrorMessage(infoMessage, statusMessage){
+   let message = document.querySelector(".statusMessage");
+    
+  try{
+
+  
+    let STATUSALERT = document.querySelector(".alert");
+    message.removeChild(STATUSALERT);
+  }catch(error){
+
+    console.log(error);
+  }
+  
+   let STATUS = document.createElement("div");
+   STATUS.classList.add("alert");
+   STATUS.classList.add(statusMessage);
+   STATUS.innerText = infoMessage
+   message.appendChild(STATUS);
+   message.style.display = "block";
+
 }
 
 
 
+// POST REQUEST AND STATUS ERROR HANDLING
+
 function showAlertSigns( statusCode){
-   let message = document.querySelector(".statusMessage");
-   let STATUS = document.createElement("div");
+   
    switch(statusCode){
       case 200: 
+      displayErrorMessage("upload was sucsessful!", "alert-info");
 
-      STATUS.classList.add("alert");
-      STATUS.classList.add("alert-info");
-      STATUS.innerText = "image succsessfully uploaded!"
-      message.appendChild(STATUS);
-      message.style.display = "block";
+     
       break;
 
 
 
 
       case 500 : 
-      STATUS.classList.add("alert");
-      STATUS.classList.add("alert-warning");
-      STATUS.innerText = "i am sorry something went wrong with uploading the immage please try again"
-      message.appendChild(STATUS);
-      message.style.display = "block";
+      displayErrorMessage("sorry something went wrong please try again", "alert-danger");
 
       break;
       case 400: 
-      STATUS.classList.add("alert");
-      STATUS.classList.add("alert-warning");
-      STATUS.innerText = "are you sure this is an immage file? Please try again!"
-      message.appendChild(STATUS);
-      message.style.display = "block";
-
+      displayErrorMessage("are you sure this is an immage what u are trying to upload there?", "alert-danger");
       break;
 
       
@@ -84,10 +204,11 @@ function showAlertSigns( statusCode){
 
 }
 
+// INPUT HANDLERS
 
-
-function handleInputChange(){
+function handleInputChange(event){
    try {
+      
       
       assertFileIsValid(fileInput.files);
      
@@ -98,10 +219,22 @@ function handleInputChange(){
       return;
       }
 
-     
-     
+      const files = event.target.files;
+      UPLOADPOINTER = files[0].name;
+
+      
+  
+      if(!checkReqInputFields()){
+  
       submitButton.disabled = false;
-}
+    }else{
+    displayErrorMessage("please fill out the required Fields", "alert-danger");
+  }
+
+  
+
+
+  }
 
 
 function assertFileIsValid(fileList){
@@ -122,9 +255,7 @@ function assertFileIsValid(fileList){
 
 }
 
-
-const LOCATION_BUTTON = document.getElementById("locationButton")
-LOCATION_BUTTON.addEventListener("click", getLocation )
+// GET GEOLOCATION
 
 function getLocation(){
 
@@ -137,10 +268,15 @@ const successPosition = (position) => {
 
    const Long = position.coords.longitude;
    const lat = position.coords.latitude 
-   const locatioField = document.getElementById("locationDataField");
+  
+   LATITUDE_INPUT_FIELD.value = lat;
+   LONGITUDE_INPUT_FIELD.value = Long;
 
-   locatioField.value = `${Long} long and ${lat}`
-   
+   if( upload_MARKER !== null){
+      map.removeLayer(upload_MARKER);
+   }
+  
+   upload_MARKER = new L.marker([lat, Long]).addTo(map);
  };
  
 
@@ -159,9 +295,20 @@ const successPosition = (position) => {
       }).addTo(map);
  
 
-function onMapClick(e){
+function onMapClick(event){
+   const latitude = event.latlng.lat;
+   const longitude = event.latlng.lng;
 
-   alert("you clicked the map at " + e.latlng);
+   if( upload_MARKER !== null){
+      map.removeLayer(upload_MARKER);
+   }
+  
+   upload_MARKER = new  L.marker(event.latlng).addTo(map);
+   LONGITUDE_INPUT_FIELD.value = longitude;
+   LATITUDE_INPUT_FIELD.value = latitude;
+
+
+
 }
 
 map.on("click", onMapClick);

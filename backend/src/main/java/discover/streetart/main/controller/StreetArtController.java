@@ -36,7 +36,7 @@ public class StreetArtController {
     //Post
     @PostMapping( value = "/api/v1/streetArt", consumes = "application/json;utf-8")
     ResponseEntity<StreetArt> addStreetArt(@RequestBody StreetArt streetArt){
-
+        System.out.println(streetArt.getDescription());
 
        return new ResponseEntity<>(streetArtService.saveStreetARt(streetArt), HttpStatus.OK);
     }

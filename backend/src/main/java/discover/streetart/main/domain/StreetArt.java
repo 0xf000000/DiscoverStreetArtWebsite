@@ -18,7 +18,7 @@ import java.util.List;
 public class StreetArt {
 
     // CONSTRUCTORS
-    public StreetArt( Float Longitude, Float Latitude, String pictureName, String picturePointer, String creationDate, String artist, String desc, Timestamp date ){
+    public StreetArt( Double Longitude, Double Latitude, String pictureName, String picturePointer, String creationDate, String artist, String desc, String date ){
         this.artist = artist;
         this.picturePointer = picturePointer;
         this.Latitude = Latitude;
@@ -36,9 +36,9 @@ public class StreetArt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long streetArtId;
-    private Float  Latitude;
+    private Double  Latitude;
 
-    private Float Longitude;
+    private Double Longitude;
     private String picture_Name;
 
     // we will use some kind of pointer here not storing the raw picture in the DB
@@ -46,7 +46,7 @@ public class StreetArt {
     private String creationDate;
     private String artist;
     private String description;
-    private Timestamp date;
+    private String date;
 
     // we need to save which user posted which streetArtPoint ?? do we?
 

@@ -37,10 +37,10 @@ public class LoadDataBase {
 
 
         return args -> {
-            StreetArt artpoint1 = new StreetArt((float) 2.00, (float) 2.00, "DKDKA", "base64","2023","john travolta", "description", new Timestamp(2023));
+            StreetArt artpoint1 = new StreetArt((Double) 2.00, (Double) 2.00, "DKDKA", "base64","2023","john travolta", "description"," new Timestamp(2023)");
             log.info("Preloading: " + streetArtRepositery.save(artpoint1));
-            log.info("Preloading: " + streetArtRepositery.save(new StreetArt((float) 2.00, (float) 2.00, "COLCOCL", "base64","2023","john travolta", "description", new Timestamp(2023))) );
-            log.info("Preloading: " + streetArtRepositery.save(new StreetArt((float) 2.00, (float) 2.00, "COCLCOL", "base64","2023","john travolta", "description", new Timestamp(2023))) );
+            log.info("Preloading: " + streetArtRepositery.save(new StreetArt((Double) 2.00, (Double) 2.00, "COLCOCL", "base64","2023","john travolta", "description", "new Timestamp(2023)")) );
+            log.info("Preloading: " + streetArtRepositery.save(new StreetArt((Double) 2.00, (Double) 2.00, "COCLCOL", "base64","2023","john travolta", "description", "new Timestamp(2023)")) );
             log.info("Preloading: " + commentRepositery.save(new Comments("woow thats a really cool streetArt3", "john", artpoint1, new Timestamp(2023))));
             log.info("Preloading: " + commentRepositery.save(new Comments("sssssss", "john", artpoint1, new Timestamp(2023))));
             log.info("Preloading: " + userRepository.save(new User("test", passwordHash , "test@mail.com")) + "");

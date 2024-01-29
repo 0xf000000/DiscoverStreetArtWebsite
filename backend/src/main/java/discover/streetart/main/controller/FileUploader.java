@@ -40,7 +40,7 @@ final String PICTURE_DIR = "/Users/leon/code/DiscoverStreetArtWebsite/backend/sr
             return new ResponseEntity<>("something went wrong server Internally", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return new ResponseEntity<>("image got successfully uploaded! fileName: " + file.getOriginalFilename(), HttpStatus.OK);
+        return new ResponseEntity<>(file.getOriginalFilename(), HttpStatus.OK);
     }
 
 

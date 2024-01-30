@@ -25,3 +25,77 @@ flex-direction: column;
 
 
 }
+
+input[type=text]{
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+   border-radius: 20px;
+   border: 1px solid #2d9fd9;
+   color: #a0d18c;
+   width: 250px;
+   height: 30px;
+   padding-left: 10px;
+   margin: 5px;
+  }
+
+
+  /* ---------- NAVBAR ----------------- */
+
+  .header {
+    background: url('https://discover-streetart.de/wp-content/uploads/2023/12/DSC05626-scaled-e1702400725598-1536x1262.jpg') no-repeat center center;
+    background-size: cover;
+    height: 75vh;
+    position: relative;
+  }
+  .header .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .header .container {
+    position: relative;
+    z-index: 2;
+  }
+  .call-to-action {
+    background: purple; /* Farbe anpassen */
+  }
+  /* Weitere individuelle Styles hier */
+
+  /* ... andere Styles ... */
+
+  /* Carousel Steuerelemente pink färben */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: pink;
+    border-radius: 50%;
+  }
+
+  /* Carousel Indikatoren pink färben */
+  .carousel-indicators li {
+    background-color: pink;
+  }
+
+  /* Aktiven Carousel Indikator pink färben */
+  .carousel-indicators .active {
+    background-color: darkpink;
+  }
+
+  /* Weitere individuelle Styles hier */
+
+  @media (min-width: 992px) {
+  .navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .navbar-toggler {
+    display: none;
+  }
+}
+
+
+
+

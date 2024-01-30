@@ -22,7 +22,7 @@ form.addEventListener("submit", handleSubmit);
 
 fileInput.addEventListener("change", handleInputChange);
 LOCATION_BUTTON.addEventListener("click", getLocation );
-
+STREETART_DATA_FORM.addEventListener("click", handleInputChange);
 
 
 
@@ -44,7 +44,7 @@ function checkReqInput(){
 
 }
 
-function checkReqInputFields(){
+function  checkReqInputFields(){
 
 
 
@@ -73,11 +73,6 @@ async function handleSubmit(event){
          
 
      }
-   
-      
-   
-     
- 
 }
 
 function createResponseObject(){
@@ -228,7 +223,7 @@ function handleInputChange(event){
   
       submitButton.disabled = false;
     }else{
-    displayErrorMessage("please fill out the required Fields", "alert-danger");
+    displayErrorMessage("please fill out the required Fields they are not rn", "alert-danger");
   }
 
   

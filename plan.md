@@ -10,13 +10,19 @@ TeckStack
 - maeby s3BUCKEt
 
  COOL LOGIN PAGE https://codepen.io/alvaromontoro/pen/JjoWVmx
---WHAT DOES IT DO-----------------------------------------
+--WHAT DOES IT DO--------------------------------------:---
 
 - eine Webapp die einem ermoeglicht all StreetArt in seiner Umgebung angezeigt zu bekommen.
 - man soll sich Einloggen koennen und dann die moeglichkeit haben auch entdeckte streetArt selber hochzuLaden.
 - es koennte auch einen Block geben, sowie eine Art Forum in der informationen ueber diese sache ausgetauscht werden kann.
 -- um selber streetArt zu sehen sollte man nicht eingelogt sein sollen,
 eine Moeglichkeit narchichten zu speichern
+- PLAN FÜR HEUTE 
+
+schoene FILE UPLOAD PAGE SCHREIBEN -> 
+
+-- FORGOTT PASSWORD?
+
 
 ----------------------------------------------------------
 

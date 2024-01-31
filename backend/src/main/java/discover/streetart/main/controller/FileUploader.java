@@ -30,7 +30,7 @@ final String PICTURE_DIR = "/Users/leon/code/DiscoverStreetArtWebsite/backend/sr
             // here we need to change the paths, when we deploy to my server
             // small checkup so we validate this is an immage file
            String contentType =  file.getContentType();
-           if(!(contentType.equals("image/jpeg") || contentType.equals("image/png"))){
+           if(!(contentType.equals("image/jpeg") || contentType.equals("image/png")) && !file.getOriginalFilename().endsWith(".png") && !file.getOriginalFilename().endsWith(".jpg") ){
                return new ResponseEntity<>("uploaded File is not an Image", HttpStatus.BAD_REQUEST);
            }
 

@@ -19,7 +19,7 @@ let upload_MARKER = null;
 // EVENT LISTENERS 
 INPUT_NAME.addEventListener("focusout", checkReqInput)
 form.addEventListener("submit", handleSubmit);
-
+submitButton.addEventListener("click", handleSubmit);
 fileInput.addEventListener("change", handleInputChange);
 LOCATION_BUTTON.addEventListener("click", getLocation );
 STREETART_DATA_FORM.addEventListener("click", handleInputChange);
@@ -58,6 +58,7 @@ function  checkReqInputFields(){
 
 
 async function handleSubmit(event){
+   
   event.preventDefault();
    let response = await uploadImage(); 
 

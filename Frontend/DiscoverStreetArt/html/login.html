@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>logoutPage</title>
+    <title>login</title>
+
+    <link href="./css/login.css" rel="stylesheet">
+
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -15,157 +18,161 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 
-          <style>
-            .header {
-              background: url('https://discover-streetart.de/wp-content/uploads/2023/12/DSC05626-scaled-e1702400725598-1536x1262.jpg') no-repeat center center;
-              background-size: cover;
-              height: 75vh;
-              position: relative;
-            }
-            .header .overlay {
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              background: rgba(0, 0, 0, 0.5);
-            }
-            .header .container {
-              position: relative;
-              z-index: 2;
-            }
-            .call-to-action {
-              background: purple; /* Farbe anpassen */
-            }
-            /* Weitere individuelle Styles hier */
-        
-            /* ... andere Styles ... */
-        
-            /* Carousel Steuerelemente pink färben */
-            .carousel-control-prev-icon,
-            .carousel-control-next-icon {
-              background-color: pink;
-              border-radius: 50%;
-            }
-        
-            /* Carousel Indikatoren pink färben */
-            .carousel-indicators li {
-              background-color: pink;
-            }
-        
-            /* Aktiven Carousel Indikator pink färben */
-            .carousel-indicators .active {
-              background-color: darkpink;
-            }
-        
-            /* Weitere individuelle Styles hier */
-        
-            @media (min-width: 992px) {
-            .navbar-brand {
-              position: absolute;
-              left: 50%;
-              transform: translateX(-50%);
-            }
-            .navbar-toggler {
-              display: none;
-            }
-          }
-        
-        
-        
-          </style>
+
+
+    <style>
+      .header {
+        background: url('https://discover-streetart.de/wp-content/uploads/2023/12/DSC05626-scaled-e1702400725598-1536x1262.jpg') no-repeat center center;
+        background-size: cover;
+        height: 75vh;
+        position: relative;
+      }
+      .header .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .header .container {
+        position: relative;
+        z-index: 2;
+      }
+      .call-to-action {
+        background: purple; /* Farbe anpassen */
+      }
+      /* Weitere individuelle Styles hier */
+  
+      /* ... andere Styles ... */
+  
+      /* Carousel Steuerelemente pink färben */
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        background-color: pink;
+        border-radius: 50%;
+      }
+  
+      /* Carousel Indikatoren pink färben */
+      .carousel-indicators li {
+        background-color: pink;
+      }
+  
+      /* Aktiven Carousel Indikator pink färben */
+      .carousel-indicators .active {
+        background-color: darkpink;
+      }
+  
+      /* Weitere individuelle Styles hier */
+  
+      @media (min-width: 992px) {
+      .navbar-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .navbar-toggler {
+        display: none;
+      }
+    }
+
+
+    body{
+      display: flex;
+     
+      flex-direction: column;
+    }
+  
+  
+  
+    </style>
+
+
+
+
+
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <!-- Logo oder Titel der Website -->
-          <a class="navbar-brand" href="/">Discover Streetart</a>
-      
-      
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      
-          <!-- Navbar content for toggling -->
-          <div class="collapse navbar-collapse" id="navbarToggler">
-            <!-- Navigation links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Menu</a>
-              </li>
-              <!-- Search form -->
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Suche</button>
-              </form>
-              <!-- Add more nav-item here if needed -->
-            </ul>
-      
-      
-            <!-- Sign in and registration links -->
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/login.html">Register/Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" style="font-weight: bold; ">+</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      
-      
-      
 
-<br>
-<br>
-<div class = "container">
-    <div class = "row">
-        <div class = "col-md-6 col-md-offset-3">
-
-            <h1> User Login Page </h1>
-            <form th:action="@{/login}" method="post">
-
-                <!-- error message -->
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger">Invalid username or
-                        password.</div>
-                </div>
-
-                <!-- logout message -->
-                <div th:if="${param.logout}">
-                    <div class="alert alert-info">You have been logged out.</div>
-                </div>
-
-                <div class = "form-group">
-                    <label for ="username"> Username </label> :
-                    <input type="text" class = "form-control" id ="username" name = "username"
-                           placeholder="Enter Email ID" autofocus="autofocus">
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>: <input type="password"
-                                                                   id="password" name="password" class="form-control"
-                                                                   placeholder="Enter Password" />
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <input type="submit" name="login-submit" id="login-submit"
-                                   class="form-control btn btn-primary" value="Log In" />
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <div class="form-group">
-						<span>New user? <a href="/" th:href="@{/registration}">Register
-								here</a></span>
-            </div>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <!-- Logo oder Titel der Website -->
+      <a class="navbar-brand" href="/">Discover Streetart</a>
+  
+  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar content for toggling -->
+      <div class="collapse navbar-collapse" id="navbarToggler">
+        <!-- Navigation links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Menu</a>
+          </li>
+          <!-- Search form -->
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Suche</button>
+          </form>
+          <!-- Add more nav-item here if needed -->
+        </ul>
+  
+  
+        <!-- Sign in and registration links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/login.html">Register/Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="font-weight: bold; ">+</a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
+    <form method="post" th:action="@{/login}" id="login-form" class="login-form" autocomplete="off" role="main">
+        <h1 class="a11y-hidden">Login Form</h1>
+        <div>
+          <label class="label-email">
+            <input type="email" class="text" id="username" name="username" placeholder="Email" tabindex="1" required />
+            <span class="required">Email</span>
+          </label>
+        </div>
+        <input type="checkbox" name="show-password" class="show-password a11y-hidden" id="show-password" tabindex="3" />
+        <label class="label-show-password" for="show-password">
+          <span>Show Password</span>
+        </label>
+        <div>
+          <label class="label-password">
+            <input type="text" class="text" id="password" name="password" placeholder="Password" tabindex="2" required />
+            <span class="required">Password</span>
+          </label>
+        </div>
+        <input type="submit" value="Log In" />
+        <div class="email">
+            
+                <a href="/registration"> new? register here!</a> <br>   <br>
+          
+          <a href="#">Forgot password?</a>
+        </div>
+        
+        <figure aria-hidden="true">
+          <div class="person-body"></div>
+          <div class="neck skin"></div>
+          <div class="head skin">
+            <div class="eyes"></div>
+            <div class="mouth"></div>
+          </div>
+          <div class="hair"></div>
+          <div class="ears"></div>
+          <div class="shirt-1"></div>
+          <div class="shirt-2"></div>
+        </figure>
+      </form>
+    
 </body>
 </html>

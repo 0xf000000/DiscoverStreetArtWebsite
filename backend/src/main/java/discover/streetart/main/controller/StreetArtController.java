@@ -35,10 +35,10 @@ public class StreetArtController {
 
     //Post
     @PostMapping( value = "/api/v1/streetArt", consumes = "application/json;utf-8")
-    ResponseEntity<StreetArt> addStreetArt(@RequestBody StreetArt streetArt){
+    ResponseEntity<String> addStreetArt(@RequestBody StreetArt streetArt){
         System.out.println(streetArt.getDescription());
-
-       return new ResponseEntity<>(streetArtService.saveStreetARt(streetArt), HttpStatus.OK);
+        streetArtService.saveStreetARt(streetArt);
+       return new ResponseEntity<>( "redirect:map", HttpStatus.OK);
     }
     //put mapping should be maby implemented not sure rn
 

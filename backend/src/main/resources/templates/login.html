@@ -21,6 +21,10 @@
 
 
     <style>
+      nav{
+
+        width: inherit;
+      }
       .header {
         background: url('https://discover-streetart.de/wp-content/uploads/2023/12/DSC05626-scaled-e1702400725598-1536x1262.jpg') no-repeat center center;
         background-size: cover;
@@ -76,17 +80,12 @@
       }
     }
   
-  
-  
     </style>
-
-
 
 
 
 </head>
 <body>
-
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -105,67 +104,83 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Menu</a>
           </li>
-          <!-- Search form -->
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Suche</button>
-          </form>
-          <!-- Add more nav-item here if needed -->
+         
         </ul>
   
   
         <!-- Sign in and registration links -->
         <ul class="navbar-nav">
+          
           <li class="nav-item">
-            <a class="nav-link" href="/login.html">Register/Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" style="font-weight: bold; ">+</a>
+            <a class="nav-link" href="map" style="font-weight: bold; ">+</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-    <form method="post" th:action="@{/login}" id="login-form" class="login-form" autocomplete="off" role="main">
-        <h1 class="a11y-hidden">Login Form</h1>
-        <div>
-          <label class="label-email">
-            <input type="email" class="text" id="username" name="username" placeholder="Email" tabindex="1" required />
-            <span class="required">Email</span>
-          </label>
-        </div>
-        <input type="checkbox" name="show-password" class="show-password a11y-hidden" id="show-password" tabindex="3" />
-        <label class="label-show-password" for="show-password">
-          <span>Show Password</span>
-        </label>
-        <div>
-          <label class="label-password">
-            <input type="text" class="text" id="password" name="password" placeholder="Password" tabindex="2" required />
-            <span class="required">Password</span>
-          </label>
-        </div>
-        <input type="submit" value="Log In" />
-        <div class="email">
-            
-                <a href="/registration"> new? register here!</a> <br>   <br>
-          
-          <a href="#">Forgot password?</a>
-        </div>
+  <div th:if="${param.confirm}">
+    <div class="alert alert-info"> okay du musst deine email addresse bestätigen befor du dich anmelden kannst!</div>
+</div>
+
+  <!-- error message -->
+  <div th:if="${param.error}">
+    <div class="alert alert-danger">Invalid username or
+        password.</div>
+</div>
+
+<!-- logout message -->
+<div th:if="${param.logout}">
+    <div class="alert alert-info">You have been logged out.</div>
+</div>
+
+  <form method="post" th:action="@{/login}" id="login-form" class="login-form custom-loginForm"  autocomplete="off" role="main">
+    <h1 class="a11y-hidden">Login Form</h1>
+
+    
+   
+    <div>
+      <label class="label-email">
+        <input type="email" class="text" id="username" name="username" placeholder="Email" tabindex="1" required />
+        <span class="required">Email</span>
+      </label>
+    </div>
+    <input type="checkbox" name="show-password" class="show-password a11y-hidden" id="show-password" tabindex="3" />
+    <label class="label-show-password" for="show-password">
+      <span>Show Password</span>
+    </label>
+    <div>
+      <label class="label-password">
+        <input type="text" class="text" id="password" name="password" placeholder="Password" tabindex="2" required />
+        <span class="required">Password</span>
+      </label>
+    </div>
+    <input type="submit" value="Log In" />
+    <div class="email">
         
-        <figure aria-hidden="true">
-          <div class="person-body"></div>
-          <div class="neck skin"></div>
-          <div class="head skin">
-            <div class="eyes"></div>
-            <div class="mouth"></div>
-          </div>
-          <div class="hair"></div>
-          <div class="ears"></div>
-          <div class="shirt-1"></div>
-          <div class="shirt-2"></div>
-        </figure>
-      </form>
+            <a href="/registration"> new? register here!</a> <br>   <br>
+      
+      <a href="#">Forgot password?</a>
+    </div>
+    
+    <figure aria-hidden="true">
+      <div class="person-body"></div>
+      <div class="neck skin"></div>
+      <div class="head skin">
+        <div class="eyes"></div>
+        <div class="mouth"></div>
+      </div>
+      <div class="hair"></div>
+      <div class="ears"></div>
+      <div class="shirt-1"></div>
+      <div class="shirt-2"></div>
+    </figure>
+  </form>
+
+
+
+
+  
     
 </body>
 </html>

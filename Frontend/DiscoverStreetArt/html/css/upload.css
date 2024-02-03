@@ -251,6 +251,11 @@ section .row i{
   align-items: center;
 }
 
+#submitPicture{
+cursor: pointer;
+ 
+}
+
 
 
 

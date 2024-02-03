@@ -7,11 +7,14 @@ function getLocation() {
  
  } 
 
-const errorCallback = (error) => {
+
+ const errorCallback = (error) => {
     displayErrorMessage("could not retrieve Location user denied request", "alert-danger");
    };
 
-   const successPosition = (position) => {
+
+
+const successPosition = (position) => {
 
     const Long = position.coords.longitude;
     const lat = position.coords.latitude 

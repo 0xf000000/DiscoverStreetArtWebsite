@@ -1,4 +1,4 @@
-import { handleStatusCodeResponse } from "./ErrorHandlingUpload.js";
+import { handleInputChange, handleStatusCodeResponse } from "./ErrorHandlingUpload.js";
 import { setupEventListener } from "./eventListener.js";
 import { getLocation } from "./map.js";
 import { postData, uploadImage, UploadArtPointData } from "./postRequest.js";
@@ -16,27 +16,40 @@ window.onload = (event) => {
 
    setupEventListener();
    submitButtoN.addEventListener("click", handleSubmit);
+   document.querySelector("#testBUtton").addEventListener("click", (event) =>{
+   //event.preventDefault();
+   handleSubmit();
+});
+   // some problem with IOS that prevents to start the event when beeing clicked
+   
    LOCATION_BUTTONE.addEventListener("click", getLocation);
+   LOCATION_BUTTONE.addEventListener("click", handleInputChange);
+   
    imageForms.addEventListener("click", () => {
 
       fileInputs.click();
+      
+      
    })
+
+
+   
 }
 
 async function handleSubmit(event) {
-
-   event.preventDefault();
+   
+   
 
    let statusCode = await uploadImage();
-
-   handleStatusCodeResponse(statusCode);
+ handleStatusCodeResponse(statusCode);
+  
 
    if (statusCode == 200) {
      let statusCode2 = await UploadArtPointData();
 
      if(statusCode2 == 200){
       
-      window.location.href= "/map";
+      window.location.href= "/map"; 
    }
    }
 }
@@ -67,3 +80,7 @@ function onMapClick(event) {
 
 }
 map.on("click", onMapClick);
+map.on("click",(event) => {
+
+   handleInputChange(event);
+});

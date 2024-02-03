@@ -87,7 +87,7 @@ public String registrationCompleteEvent( @RequestParam("token") String token, We
                 System.out.println(e.fillInStackTrace());
                 return "redirect:registration?error";
             }
-            return "redirect:registration?success";
+            return "redirect:login?confirm";
     }
 
 }

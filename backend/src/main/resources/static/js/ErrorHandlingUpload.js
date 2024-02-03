@@ -50,30 +50,30 @@ function displayErrorMessage(infoMessage, statusMessage){
  
 
  function handleInputChange(event){
-    const files = event.target.files;
+   
     const submitButton = document.querySelector('#submitPicture');
-      
+    const pictureInput = document.querySelector("#pictureInput");
  
        if(!checkReqInputFields()){
           displayErrorMessage("please fill out all required fields :0", "alert-danger")
-          submitButton.disabled = true
+         // submitButton.disabled = true
           return;
      }
-     if (files == null){
+     if (pictureInput.files[0] == null){
        displayErrorMessage("please provide a image for your streetArtpoint", "alert-danger")
        return;
     }
     
        
-      if(!assertFileIsValid(files)){
+      if(!assertFileIsValid(pictureInput.files)){
        displayErrorMessage("please provide a valid input file! (jpg/png)", "alert-danger");
-       submitButton.disabled = true
+       //submitButton.disabled = true
        return;
       }
  
       deleteErrorMessage();
        
-     submitButton.disabled = false;
+     //submitButton.disabled = false;
  
    }
 

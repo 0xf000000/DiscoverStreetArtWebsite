@@ -2,49 +2,104 @@ import { $ } from "./utils.js"
 import {displayErrorMessage, deleteErrorMessage} from "./ErrorHandlingUpload.js"
 window.onload = () => {
 let passwordInput = $("#password");
-  passwordInput.addEventListener("focusout", checkIfValidPassword);
-
-
+let emailInput = $("#email");
+let confirmPassword = $("#confirmPassword");
+  passwordInput.addEventListener("focusout", validatePassword);
+  emailInput.addEventListener("focusout", checkIfEmailIsValid);
+  confirmPassword.addEventListener("focusout", validatePassword);
 
 }
 
 
-function disableButton( B_enabled){
-    $(".btn").disabled = B_enabled;
-}
-
-
-
-function checkIfValidPassword(){
- let password = $("#password").value;
-
-  if(!password.match(/[a-z]/g)){
-    displayErrorMessage("there should be atLeast one lowercase Letter in your password :()", "alert-danger");
+function validatePassword(){
+  if(!IsPasswordMatching()){
+      displayErrorMessage("passwords do not match!", "alert-danger");
     disableButton(true);
     return;
   }
 
-  if(!password.match(/[A-Z]/g)){
-    displayErrorMessage("there should be atleast one Uppercase Letter in your password :(", "alert-danger");
+
+
+  if(!checkIfValidPassword()){
+    displayErrorMessage("password: 6-20 Characters atleast one Uppercase letter, and atleast one number", "alert-danger");
     disableButton(true);
     return;
   }
 
-  if(!password.match(/[0-9]/g)){
-    displayErrorMessage("there should be atleast one number in your password :(" ,"alert-danger");
-    disableButton(true);
-    return;
-  }
 
-  if(password.length <= 6 || password.length > 20){
-
-    displayErrorMessage("your password should be more than 6 characters and less than 20 :(", "alert-danger");
-    disableButton(true)
-    return;
-  }
 
   deleteErrorMessage();
   disableButton(false);
 
+
+}
+
+function IsPasswordMatching(){
+  let password = $("#password").value.trim();
+  let confirmPassword = $("#confirmPassword").value.trim();
+
+  return password == confirmPassword
+    
+  
+}
+
+
+
+// just disables the button
+function disableButton( B_enabled){
+    $(".btn").disabled = B_enabled;
+}
+
+function validateEmail(email){
+
+  return email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+}
+
+
+
+
+function checkIfEmailIsValid(){
+let emailField = $("#email").value.trim();
+
+  if(!validateEmail(emailField)){
+    displayErrorMessage("please use a valid Email Address!", "alert-danger");
+    disableButton(true);
+    return;
+  }
+
+  disableButton(false);
+  deleteErrorMessage();
+
+}
+
+// checks if the password matches our security standarts :0 which are not rly high
+function checkIfValidPassword(){
+ let password = $("#password").value.trim();
+  let isPasswordValid = true;
+  if(!password.match(/[a-z]/g)){
+    isPasswordValid= false;
+
+  }
+
+  if(!password.match(/[A-Z]/g)){
+    isPasswordValid = false;
+  
+  }
+
+  if(!password.match(/[0-9]/g)){
+  isPasswordValid = false;
+
+
+  }
+
+  if(password.length <= 6 || password.length > 20){
+    
+    isPasswordValid = false;
+  }
+
+  
+
+  return isPasswordValid;
 
 }

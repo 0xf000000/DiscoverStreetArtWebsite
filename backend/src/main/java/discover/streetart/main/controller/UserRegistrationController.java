@@ -36,7 +36,7 @@ public class UserRegistrationController {
         return new UserRegestrationDto();
     }
 
-    @GetMapping
+    @GetMapping()
     public String showRegistrationForm(){
         return "registration";
     }
@@ -50,7 +50,7 @@ public String registrationCompleteEvent( @RequestParam("token") String token, We
         // if token doesnt exist in database, we just return a error page when u try to visit this endpoint
         if(requestToken == null){
 
-            return "registration?error";
+            return "redirect:/registration?tokendoesntExist";
         }
 
        User user =  requestToken.getUser();
@@ -58,7 +58,7 @@ public String registrationCompleteEvent( @RequestParam("token") String token, We
 
         // if token is expired return error
         if( expiredTimeInSeconds <= 0 ) {
-            return "confirm?error=tokenIsSadlyExpired";
+            return "redirect:registration?TokenExpired";
         }
 
 
@@ -69,7 +69,7 @@ public String registrationCompleteEvent( @RequestParam("token") String token, We
 
 
 
-        return "login";
+        return "redirect:/login";
 
 }
 

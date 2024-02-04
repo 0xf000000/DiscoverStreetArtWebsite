@@ -78,7 +78,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <!-- Logo oder Titel der Website -->
-    <a class="navbar-brand" href="index.html">Discover Streetart</a>
+    <a class="navbar-brand" href="/">Discover Streetart</a>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,9 +103,12 @@
 
       <!-- Sign in and registration links -->
       <ul class="navbar-nav">
+    <div sec:authorize="isAuthenticated()"> <div th:text="${#authentication.getPrincipal().getUsername()}"></div> </div>
         <li class="nav-item">
           <a class="nav-link" href="/login">Register/Login</a>
         </li>
+        </div>
+
         <li class="nav-item">
           <a class="nav-link" href="#" style="font-weight: bold; ">+</a>
         </li>

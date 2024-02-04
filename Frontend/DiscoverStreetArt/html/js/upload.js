@@ -1,7 +1,7 @@
 import { handleInputChange, handleStatusCodeResponse } from "./ErrorHandlingUpload.js";
 import { setupEventListener } from "./eventListener.js";
 import { getLocation } from "./map.js";
-import { postData, uploadImage, UploadArtPointData } from "./postRequest.js";
+import { uploadImage, UploadArtPointData } from "./postRequest.js";
 
 // GLOBAL SCOPE VARIABLES
 let upload_MARKER = null;
@@ -16,10 +16,6 @@ window.onload = (event) => {
 
    setupEventListener();
    submitButtoN.addEventListener("click", handleSubmit);
-   document.querySelector("#testBUtton").addEventListener("click", (event) =>{
-   //event.preventDefault();
-   handleSubmit();
-});
    // some problem with IOS that prevents to start the event when beeing clicked
    
    LOCATION_BUTTONE.addEventListener("click", getLocation);

@@ -1,6 +1,7 @@
 package discover.streetart.main.service;
 
 import discover.streetart.main.customExceptions.userAlereadyExistsException;
+import discover.streetart.main.domain.PasswordResetToken;
 import discover.streetart.main.domain.Role;
 import discover.streetart.main.domain.User;
 import discover.streetart.main.domain.VerifycationToken;
@@ -114,6 +115,14 @@ public class UserService implements IUserService {
         newToken.setExpiryDate(expiryDate);
 
         tokenRepositery.save(newToken);
+    }
+
+
+    public void setResetPasswordToken(){
+        //PasswordResetToken passwordResetToken = new PasswordResetToken();
+
+
+
     }
 
 

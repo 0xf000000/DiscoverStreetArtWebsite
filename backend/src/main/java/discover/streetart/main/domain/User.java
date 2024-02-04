@@ -43,6 +43,7 @@ public class User implements UserDetails {
 
 
     @NonNull
+    @Column(name = "username")
     private String username;
 
 
@@ -68,7 +69,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return this.username;
     }
 
     @Override

@@ -56,7 +56,7 @@ function displayErrorMessage(infoMessage, statusMessage){
  
        if(!checkReqInputFields()){
           displayErrorMessage("please fill out all required fields :0", "alert-danger")
-         // submitButton.disabled = true
+          submitButton.disabled = true
           return;
      }
      if (pictureInput.files[0] == null){
@@ -67,13 +67,13 @@ function displayErrorMessage(infoMessage, statusMessage){
        
       if(!assertFileIsValid(pictureInput.files)){
        displayErrorMessage("please provide a valid input file! (jpg/png)", "alert-danger");
-       //submitButton.disabled = true
+       submitButton.disabled = true
        return;
       }
  
       deleteErrorMessage();
        
-     //submitButton.disabled = false;
+     submitButton.disabled = false;
  
    }
 

@@ -5,16 +5,14 @@ import discover.streetart.main.domain.PasswordResetToken;
 import discover.streetart.main.domain.Role;
 import discover.streetart.main.domain.User;
 import discover.streetart.main.domain.VerifycationToken;
+import discover.streetart.main.repositery.PasswordResetRepositery;
 import discover.streetart.main.repositery.UserRepository;
 import discover.streetart.main.repositery.VerifycationTokenRepositery;
-import discover.streetart.main.security.SecurityConfiguration;
 import discover.streetart.main.web.dto.UserRegestrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -28,11 +26,16 @@ public class UserService implements IUserService {
     @Autowired
     private VerifycationTokenRepositery tokenRepositery;
 
+    @Autowired
+    private PasswordResetRepositery passwordResetRepositery;
+
     public Optional<User> getUserByID(Long id){
         return userRepository.findById(id);
 
     }
 
+
+    // i think it returns null by default ngl
 
     public User getUserbyemail(String email){
 
@@ -40,7 +43,11 @@ public class UserService implements IUserService {
             return null;
         }
 
-        return userRepository.findUserByEmail(email);
+       User  user = userRepository.findUserByEmail(email);
+
+
+
+        return user;
     }
 
     public User getUserByUsername(String username){
@@ -53,12 +60,17 @@ public class UserService implements IUserService {
 
     }
 
+    public PasswordResetToken findResetTokenByToken(String token){
+        return passwordResetRepositery.findByToken(token);
+    }
+
+
     /**
      * checks if we have a corresponding token in our database
      * @param token
      * @return
      */
-    public VerifycationToken findByToken(String token){
+    public VerifycationToken findByVerifycationToken(String token){
 
 
        return tokenRepositery.findByToken(token);
@@ -118,22 +130,25 @@ public class UserService implements IUserService {
     }
 
 
-    public void setResetPasswordToken(){
-        //PasswordResetToken passwordResetToken = new PasswordResetToken();
+    public void setResetPasswordToken(User user, String token){
 
+        PasswordResetToken passwordResetToken = new PasswordResetToken(user, token);
+        final int expiryDateInMinutes = 2880;
+        final Date expiryDate = calculateExpiryDate(expiryDateInMinutes);
+        passwordResetToken.setExpiryDATE(expiryDate);
 
-
+        passwordResetRepositery.save(passwordResetToken);
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = getUserbyemail(email);
-        boolean enabled = user.isEnabled();
+
         if( user == null){
             throw new UsernameNotFoundException("username doesnt exists in database");
         }
-
+        boolean enabled = user.isEnabled();
         if(!enabled){
 
             throw new UsernameNotFoundException("please confirm your identity with your email adress");
@@ -150,6 +165,6 @@ public class UserService implements IUserService {
 
 
 
-        return userDetails;
+        return   userDetails;
     }
 }

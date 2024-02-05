@@ -30,7 +30,7 @@ function displayErrorMessage(infoMessage, statusMessage){
    
     switch(statusCode){
        case 200: 
-       displayErrorMessage("upload was sucsessful!", "alert-info");      
+       displayErrorMessage(" upload was sucsessfull!", "alert-info");      
        break;
 
        case 500 : 

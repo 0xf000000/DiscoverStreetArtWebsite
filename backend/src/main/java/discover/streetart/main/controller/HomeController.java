@@ -22,11 +22,8 @@ public class HomeController {
     }
 
 
-    // login Page
     @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
+    public String login() {return "login";}
 
     //map Page
     @GetMapping("/map")

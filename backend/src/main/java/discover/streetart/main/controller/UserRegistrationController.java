@@ -45,7 +45,7 @@ public class UserRegistrationController {
 @GetMapping("/confirm" )
 public String registrationCompleteEvent( @RequestParam("token") String token, WebRequest request){
         Locale locale = request.getLocale();
-        VerifycationToken requestToken =  userService.findByToken(token);
+        VerifycationToken requestToken =  userService.findByVerifycationToken(token);
          Calendar cal  = Calendar.getInstance();
         // if token doesnt exist in database, we just return a error page when u try to visit this endpoint
         if(requestToken == null){

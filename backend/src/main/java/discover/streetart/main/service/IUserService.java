@@ -11,6 +11,7 @@ public interface IUserService extends UserDetailsService {
     User RegisterNewAccount(UserRegestrationDto userRegestrationDto) throws userAlereadyExistsException;
 
     void setAuthToken( User user, String token);
+    public void setResetPasswordToken(User user, String token);
 
 
 }

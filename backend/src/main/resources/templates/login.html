@@ -130,6 +130,15 @@
         password.</div>
 </div>
 
+    <div th:if="${param.passwordChanged}">
+    <div class="alert alert-info"> password succsessfully changed!</div>
+
+    </div>
+    <div th:if="${param.emailForPasswordReset}">
+      <div class="alert alert-info"> email for reseting your password got succsessfully sended!</div>
+
+
+    </div> 
 <!-- logout message -->
 <div th:if="${param.logout}">
     <div class="alert alert-info">You have been logged out.</div>

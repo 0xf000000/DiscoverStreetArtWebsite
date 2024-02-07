@@ -27,7 +27,8 @@ let PostEmail = async (event) => {
   switch( statusCode){
 
     case 200: 
-    displayErrorMessage("email got succsesfully sended!", "alert-info"); 
+    displayErrorMessage("email got succsesfully sended!", "alert-info");
+      window.location.href = "http://localhost:8080/login?emailForPasswordReset";
     break;
 
     case 404: 

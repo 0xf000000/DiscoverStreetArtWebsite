@@ -6,6 +6,7 @@ import discover.streetart.main.domain.User;
 import discover.streetart.main.event.OnPasswordResetEvent;
 import discover.streetart.main.service.IUserService;
 import discover.streetart.main.service.UserService;
+import discover.streetart.main.web.dto.ResetPasswordDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -13,11 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 
@@ -30,6 +29,11 @@ public class ForgottPasswordController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    PasswordEncoder encoder;
+
+
 
 
     @GetMapping()
@@ -88,5 +92,27 @@ public class ForgottPasswordController {
     public String updatePassword(@RequestParam String token){
 
         return "updatePassword";
+    }
+
+
+    @PostMapping(value = "/updatePassword")
+    public ResponseEntity<String> PostNewPassword(@RequestBody ResetPasswordDto resetPasswordDto){
+        String token = resetPasswordDto.getToken();
+        String password = resetPasswordDto.getPassword();
+         PasswordResetToken resetToken = userService.findResetTokenByToken(token);
+
+         if( password.equals("") || password == null){
+             return new ResponseEntity<>("password is null ", HttpStatus.BAD_REQUEST);
+         }
+
+         if( resetToken == null){
+             return new ResponseEntity<>("user cant be found to according Token", HttpStatus.BAD_REQUEST);
+         }
+
+         User user = resetToken.getUser();
+         user.setPassword(encoder.encode(password));
+         userService.saveRegisteredUser(user);
+
+        return new ResponseEntity<>("password successfully changed", HttpStatus.OK);
     }
 }

@@ -29,7 +29,7 @@ public class SecurityConfiguration {
     IUserService userDetailsService;
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
     // test user

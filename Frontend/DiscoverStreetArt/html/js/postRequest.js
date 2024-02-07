@@ -84,4 +84,14 @@ async function uploadImage(){
      }
 
 
-export { postData, uploadImage, UploadArtPointData};
+function getURLparameter(){
+  let queryString = window.location.search;
+  let urlParams  = new URLSearchParams(queryString);
+
+  return urlParams;
+}
+
+
+
+
+export { postData, uploadImage, UploadArtPointData, getURLparameter};

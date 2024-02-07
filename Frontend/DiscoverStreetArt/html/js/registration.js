@@ -1,6 +1,9 @@
 import { $ } from "./utils.js"
 import {displayErrorMessage, deleteErrorMessage} from "./ErrorHandlingUpload.js"
+import {validatePassword} from "./validatePassword.js"
+
 window.onload = () => {
+
 let passwordInput = $("#password");
 let emailInput = $("#email");
 let confirmPassword = $("#confirmPassword");
@@ -11,37 +14,7 @@ let confirmPassword = $("#confirmPassword");
 }
 
 
-function validatePassword(){
-  if(!IsPasswordMatching()){
-      displayErrorMessage("passwords do not match!", "alert-danger");
-    disableButton(true);
-    return;
-  }
 
-
-
-  if(!checkIfValidPassword()){
-    displayErrorMessage("password: 6-20 Characters atleast one Uppercase letter, and atleast one number", "alert-danger");
-    disableButton(true);
-    return;
-  }
-
-
-
-  deleteErrorMessage();
-  disableButton(false);
-
-
-}
-
-function IsPasswordMatching(){
-  let password = $("#password").value.trim();
-  let confirmPassword = $("#confirmPassword").value.trim();
-
-  return password == confirmPassword
-    
-  
-}
 
 
 
@@ -73,33 +46,3 @@ let emailField = $("#email").value.trim();
 
 }
 
-// checks if the password matches our security standarts :0 which are not rly high
-function checkIfValidPassword(){
- let password = $("#password").value.trim();
-  let isPasswordValid = true;
-  if(!password.match(/[a-z]/g)){
-    isPasswordValid= false;
-
-  }
-
-  if(!password.match(/[A-Z]/g)){
-    isPasswordValid = false;
-  
-  }
-
-  if(!password.match(/[0-9]/g)){
-  isPasswordValid = false;
-
-
-  }
-
-  if(password.length <= 6 || password.length > 20){
-    
-    isPasswordValid = false;
-  }
-
-  
-
-  return isPasswordValid;
-
-}

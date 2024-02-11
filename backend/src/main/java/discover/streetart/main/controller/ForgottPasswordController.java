@@ -51,7 +51,7 @@ public class ForgottPasswordController {
         // if i throw an error here or display one someone could try to find out if a specific email exists in my database
         // so we just display a succsess page small hack but i think when i wanna show this online its way better to do it like this
         if( user == null){
-          return new ResponseEntity<>( "email Sended", HttpStatus.OK);
+          return new ResponseEntity<>( "user doesnt Exist", HttpStatus.BAD_REQUEST);
         }
 
         try{

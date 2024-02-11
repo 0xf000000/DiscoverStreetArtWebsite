@@ -1,14 +1,37 @@
 import { postData} from "./postRequest.js"
 import { $ } from "./utils.js"
-import { displayErrorMessage} from "./ErrorHandlingUpload.js";
+import { deleteErrorMessage, displayErrorMessage} from "./ErrorHandlingUpload.js";
+import { validateEmail } from "./validatePassword.js";
+
 
 window.onload = () =>{
 let form = $("form");
+let input = $("#email");
 
-form.addEventListener("submit", PostEmail)
+form.addEventListener("submit", PostEmail);
+input.addEventListener("focusout", validateInputIsEmail);
+}
+
+
+
+
+function validateInputIsEmail(){
+  let submitButton = $(".custumSubmitButton");
+  let input = $("#email").value
+  
+
+  if(validateEmail(input)){
+    deleteErrorMessage();
+    submitButton.disabled = false;
+
+  } else{
+    submitButton.disabled= true;
+    displayErrorMessage("this is not a valid email!", "alert-danger");
+  }
 
 
 }
+
 
 
 let PostEmail = async (event) => {
@@ -28,11 +51,12 @@ let PostEmail = async (event) => {
 
     case 200: 
     displayErrorMessage("email got succsesfully sended!", "alert-info");
+    
       window.location.href = "http://localhost:8080/login?emailForPasswordReset";
     break;
 
-    case 404: 
-    displayErrorMessage("something went wrong please try again :( ", "alert-info");
+    case 400: 
+    displayErrorMessage("something went wrong please try again :( ", "alert-danger");
     break; 
   }
 

@@ -89,7 +89,7 @@ function checkIfValidPassword(){
 
 
 
-export { validatePassword, checkIfValidPassword, IsPasswordMatching};
+export { validateEmail, validatePassword, checkIfValidPassword, IsPasswordMatching};
 
 
 

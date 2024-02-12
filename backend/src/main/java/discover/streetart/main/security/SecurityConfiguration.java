@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -54,7 +55,7 @@ public class SecurityConfiguration {
 
         http.csrf().disable().cors().disable()
 
-                .authorizeHttpRequests().requestMatchers(  "api/v1/art/delete/{id}", "api/v1/comments").hasAnyRole("USER", "ADMIN")
+                .authorizeHttpRequests().requestMatchers( "api/v1/comments").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/**", "/oauth/**").permitAll()
                 .and()
                 .formLogin()
@@ -63,9 +64,12 @@ public class SecurityConfiguration {
                 .logout().invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
-                .and()
-                .oauth2Login().loginPage("/login")
+                .logoutSuccessUrl("/login?logout");
+
+        // TODO: this code is for Oauth2 but since u gotta verify your app to get it i wont implement it know or maby better said i cant rly implement it rn
+               /* .and()
+                .oauth2Login()
+                .loginPage("/login")
                 .userInfoEndpoint()
                 .userService(oAuthUserService)
                 .and()
@@ -79,7 +83,7 @@ public class SecurityConfiguration {
 
                         response.sendRedirect("/");
                     }
-                });
+                });*/
 
 
 

@@ -57,6 +57,22 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    // new Variable provider for Oauth2
+
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
+
+    public void setProvider( Provider provider){
+        this.provider = provider;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+
+    // stupid constructors i have to leave here
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of( new  SimpleGrantedAuthority(role.name()));

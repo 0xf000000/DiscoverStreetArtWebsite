@@ -1,8 +1,13 @@
 package discover.streetart.main.security;
 
+import discover.streetart.main.domain.CustomOAuth2User;
 import discover.streetart.main.domain.Role;
+import discover.streetart.main.service.CustomOAuthUserService;
 import discover.streetart.main.service.IUserService;
 import discover.streetart.main.service.UserService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,13 +17,17 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -27,6 +36,9 @@ public class SecurityConfiguration {
 
     @Autowired
     IUserService userDetailsService;
+
+    @Autowired
+    private CustomOAuthUserService oAuthUserService;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -43,7 +55,7 @@ public class SecurityConfiguration {
         http.csrf().disable().cors().disable()
 
                 .authorizeHttpRequests().requestMatchers(  "api/v1/art/delete/{id}", "api/v1/comments").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/**").permitAll()
+                .requestMatchers("/**", "/oauth/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -51,7 +63,26 @@ public class SecurityConfiguration {
                 .logout().invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout");
+                .logoutSuccessUrl("/login?logout")
+                .and()
+                .oauth2Login().loginPage("/login")
+                .userInfoEndpoint()
+                .userService(oAuthUserService)
+                .and()
+                .successHandler(new AuthenticationSuccessHandler() {
+                    @Override
+                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+
+                        CustomOAuth2User oauthUser = (CustomOAuth2User) authentication.getPrincipal();
+
+                        // here comes custom user service logic if i wanna save the password and username in my database also but id rly care ka ob ich das mache
+
+                        response.sendRedirect("/");
+                    }
+                });
+
+
+
 
 
 

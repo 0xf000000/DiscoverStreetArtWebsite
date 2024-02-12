@@ -25,6 +25,11 @@ fi
 # checking java version
 JAVA_VERSION=$(java --version | grep -c 'OpenJDK' )
 echo $JAVA_VERSION
+#pulling from git the newest version
+cd ../..
+git pull origin develope
 
-cd ../../backend
+# executing the application@ 
+cd ./backend
+
 mvn clean spring-boot:run

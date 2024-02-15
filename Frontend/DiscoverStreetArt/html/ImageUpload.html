@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ImageUpload</title>
-    <link href="./css/FileUpload.css" rel="stylesheet"> 
+    <link href="./css/FileUpload.css" rel="stylesheet">
     <script type="module" src="./js/imageUpload.js"></script>
+    <!-- icons and links-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+   
+  
+
 </head>
+
 <body>
 
-    <div> <h1> Image Uploader</h1></div>
+    <div class="wrapper">
+        <header> Please select an Image </header>
+        <div class="statusMessage"></div>
 
-
-    <div class="inputFileWrapper">
-        <h1 class="immageheader"> please select an image </h1>
-
-        <form id="pictureForm" method="post" th:action="@{/upload}" enctype="multipart/form-data">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p id="browseToFIle">Brouwse File to Upload</p>
-
-            <input type="file" name="image" accept="image/*" class=" " id="pictureInput" hidden>
-            
+        <div class="inputFileWrapper">
            
-           
-        </form>
 
-    
+            <form id="pictureForm" method="post" th:action="@{/upload}" enctype="multipart/form-data">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p id="browseToFIle">Brouwse File to Upload</p>
+
+                <input type="file" name="image" accept="image/*" class="fileInput" hidden>
+
+            </form>
+
+            <section class="progress-area">
+               
+            </section>
+
+            <section class="uploaded-area">
+              
+
+
+            </section>
+
+          
+        </div>
+
+    </div>
+
 </body>
+
 </html>

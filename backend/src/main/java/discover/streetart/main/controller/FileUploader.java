@@ -19,7 +19,8 @@ import java.util.logging.Logger;
 public class FileUploader {
 
 final String PICTURE_DIR = "/Users/leon/code/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures/";
-
+final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreetArtWebsite\\backend\\src\\main\\resources\\static\\pictures\\" +
+        "";
 
 
     // we also should here validate that its a picture file and nothing else reallz important
@@ -34,9 +35,11 @@ final String PICTURE_DIR = "/Users/leon/code/DiscoverStreetArtWebsite/backend/sr
                return new ResponseEntity<>("uploaded File is not an Image", HttpStatus.BAD_REQUEST);
            }
 
-            file.transferTo(new File( PICTURE_DIR + file.getOriginalFilename()));
+           // holly shit cause im on windows i need to change it temporarly
+            file.transferTo(new File( PICTURE_DIR_WIN + file.getOriginalFilename()));
 
         }catch(IOException e){
+            System.out.println(e.fillInStackTrace());
             return new ResponseEntity<>("something went wrong server Internally", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

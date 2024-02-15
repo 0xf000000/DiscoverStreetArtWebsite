@@ -41,11 +41,13 @@ function IsPasswordMatching(){
 
 
 
-// just disables the button
+// just disables a button with the class .btn usually i only have one button on the website, could of been abstracter
 function disableButton( B_enabled){
     $(".btn").disabled = B_enabled;
 }
 
+
+// validates the email to be a normal email atleast from the syntax wise
 function validateEmail(email){
 
   return email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);

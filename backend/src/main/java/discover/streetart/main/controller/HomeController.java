@@ -16,10 +16,13 @@ public class HomeController {
     // upload Page
 
     // just simply gets the html page that gives us the file
-    @GetMapping("/upload")
-    public String upload(){
-        return "upload";
+    @GetMapping("/uploadImage")
+    public String Imageupload(){
+        return "ImageUpload";
     }
+
+    @GetMapping("/pointUpload")
+    public String PointUpload() {return "streetArtUpload";}
 
 
     @GetMapping("/login")

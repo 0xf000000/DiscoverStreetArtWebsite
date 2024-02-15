@@ -1,18 +1,17 @@
 import { handleInputChange, handleStatusCodeResponse } from "./ErrorHandlingUpload.js";
 import { setupEventListener } from "./eventListener.js";
 import { getLocation } from "./map.js";
-import { uploadImage, UploadArtPointData } from "./postRequest.js";
+import { uploadImage, UploadArtPointData } from "./Requests.js";
 
 // GLOBAL SCOPE VARIABLES
 let upload_MARKER = null;
 
 
 // EVENT LISTENERS
-window.onload = (event) => {
+window.onload = () => {
    const submitButtoN = document.querySelector('#submitPicture');
    const LOCATION_BUTTONE = document.getElementById("locationButton");
-   const imageForms = document.querySelector("#pictureForm");
-   const fileInputs = document.getElementById("pictureInput");
+  
 
    setupEventListener();
    submitButtoN.addEventListener("click", handleSubmit);
@@ -21,45 +20,36 @@ window.onload = (event) => {
    LOCATION_BUTTONE.addEventListener("click", getLocation);
    LOCATION_BUTTONE.addEventListener("click", handleInputChange);
    
-   imageForms.addEventListener("click", () => {
-
-      fileInputs.click();
-      
-      
-   })
-
+ 
 
    
 }
 
 async function handleSubmit(event) {
    
-   
+     let statusCode = await UploadArtPointData();
 
-   let statusCode = await uploadImage();
- handleStatusCodeResponse(statusCode);
-  
-
-   if (statusCode == 200) {
-     let statusCode2 = await UploadArtPointData();
-
-     if(statusCode2 == 200){
+      handleStatusCodeResponse(statusCode);
       
+      if(statusCode == 200 ){
+
       window.location.href= "/map"; 
-   }
+      
    }
 }
 
 // TODO: this solution is hella shitty but its the best way i can do it rn
 
 
-var map = L.map('map').setView({ lon: 6.960701, lat: 50.937066 }, 13);
+let map = L.map('map').setView({ lon: 6.960701, lat: 50.937066 }, 13);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
    maxZoom: 19,
    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
 }).addTo(map);
 
+
+// when u click on the map you get the selected latitude and longitute 
 function onMapClick(event) {
    const LONGITUDE_INPUT_FIELD = document.querySelector("#longitude");
    const LATITUDE_INPUT_FIELD = document.querySelector("#latitude");

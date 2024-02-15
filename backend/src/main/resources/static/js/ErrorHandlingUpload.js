@@ -35,11 +35,16 @@ function displayErrorMessage(infoMessage, statusMessage){
 
        case 500 : 
        displayErrorMessage("sorry something went wrong please try again", "alert-danger");
- 
+         exit();
        break;
        case 400: 
        displayErrorMessage("are you sure this is an immage what u are trying to upload there?", "alert-danger");
+       exit();
        break;
+       case 413:
+         displayErrorMessage(" Image is to big", "alert-danger");
+         exit();
+         break;
  
        
  
@@ -52,24 +57,15 @@ function displayErrorMessage(infoMessage, statusMessage){
  function handleInputChange(event){
    
     const submitButton = document.querySelector('#submitPicture');
-    const pictureInput = document.querySelector("#pictureInput");
+  
  
        if(!checkReqInputFields()){
           displayErrorMessage("please fill out all required fields :0", "alert-danger")
           submitButton.disabled = true
           return;
      }
-     if (pictureInput.files[0] == null){
-       displayErrorMessage("please provide a image for your streetArtpoint", "alert-danger")
-       return;
-    }
+     
     
-       
-      if(!assertFileIsValid(pictureInput.files)){
-       displayErrorMessage("please provide a valid input file! (jpg/png)", "alert-danger");
-       submitButton.disabled = true
-       return;
-      }
  
       deleteErrorMessage();
        
@@ -79,7 +75,6 @@ function displayErrorMessage(infoMessage, statusMessage){
 
    function  checkReqInputFields(){
     const LONGITUDE_INPUT_FIELD = document.getElementById("latitude");
-    const fileINPUT = document.querySelector("#pictureInput");
     const INPUT_NAME = document.getElementById("name");
     
     if (INPUT_NAME.value.trim() == "" ){
@@ -90,9 +85,7 @@ function displayErrorMessage(infoMessage, statusMessage){
        return false;
     }
  
-    if(fileINPUT.files == null){
-       return false;
-    }
+   
  
     return true;
  

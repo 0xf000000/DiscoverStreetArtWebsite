@@ -18,7 +18,7 @@ window.onload = () => {
  async function postNewPassword( event){
   event.preventDefault();
 
-  let URL = "http://localhost:8080/forgotPassword/updatePassword";
+  let URL = "/forgotPassword/updatePassword";
  let newPassword = $("#password").value;
   let urlParameter = getURLparameter();
 
@@ -39,7 +39,7 @@ let data = {
   let statusCode = await postData(URL, fetchOptions );
 
   if(200 == statusCode){
-    window.location.href = "http://localhost:8080/login?passwordChanged" 
+    window.location.href = "/login?passwordChanged" 
   }
   else if ( 400 == statusCode){
     displayErrorMessage("something went wrong with reseting your password! please try again", "alert-danger");

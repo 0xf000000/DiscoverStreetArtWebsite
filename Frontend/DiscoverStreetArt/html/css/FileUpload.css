@@ -1,3 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #6990f2;
+
+}
+
+.wrapper{
+padding: 30px;
+background: #fff;
+border-radius: 5px;
+}
+
+.wrapper header{
+  color: #6990f2;
+  font-size: 27px;
+  text-align: center;
+  font-weight: 600;
+}
+
+
+
 .inputFileWrapper{
 
     width: 430px;
@@ -40,11 +74,12 @@
   
   form p{
     font-size: 16px;
+    margin-top:15px;
   }
   
   
   section .row{
-    background-color: #a1b3e0;
+    background: #e9f0ff;
     margin-bottom: 10px;
     list-style: none;
     padding: 15px 20px;
@@ -60,7 +95,7 @@
   
   }
   
-  .progressArea .row .content{
+  .progress-area .row .content{
   
     width: 100%;
     margin-left: 15px;
@@ -69,16 +104,14 @@
   
   }
   
-  .progressArea .details{
+  .progress-area .details{
     display: flex;
     align-items: center;
-    margin-bottom: 7px;
     justify-content:space-between ;
-  
-  
+    flex-direction: column;
   }
   
-  .progressArea .progress-bar{
+  .progress-area .progress-bar{
     height: 6px;
     width:100% ;
     background: #fff;
@@ -86,20 +119,23 @@
     border-radius: 30px ;
   }
   
-  .progress-bar .progressss{
+  .progress-bar .progress{
     height: 100%;
-    width: 0%;
-    background: #6990f2;
+    width: 50%;
+    background: black;
     border-radius: inherit;
   }
   
-  .uploadedArea{
+  .uploaded-area{
     max-height: 230px;
     overflow-y: scroll;
   }
+
+
   
-  .uploadedArea::-webkit-scrollbar{
+  .uploaded-area::-webkit-scrollbar{
     width: 0px;
+    display: none;
   }
   
   
@@ -108,23 +144,23 @@
   
   }
   
-  .uploadedArea .row .content{
+  .uploaded-area .row .content{
   
     display: flex;
     align-items: center;
   }
   
-  .uploadedArea .row .details{
+  .uploaded-area .row .details{
     display: flex;
     margin-left: 15px;
     flex-direction: column;
   }
   
-  .uploadedArea .details .size{
+  .uploaded-area .details .size{
     font-size: 11px;
     color:#404040 ;
   }
-  .uploadedArea .fa-check{
+  .uploaded-area .fa-check{
     font-size: 16px;
     color: #6990f2
   }

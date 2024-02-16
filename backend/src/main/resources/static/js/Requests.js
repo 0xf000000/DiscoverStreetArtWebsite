@@ -18,14 +18,14 @@ async function postData(url, fetchOptions) {
 
 async function uploadImage(name) {
    const pictureForm = $("#pictureForm");
-   
+     
    const url = "/api/v1/upload";
    const method = "post";
    const formData = new FormData(pictureForm);
 
    let request = new XMLHttpRequest(); // creating xml request object need to use it cause there is no way in fetch() to track upload progress
    request.open(method, url);
-
+  
    request.upload.addEventListener('progress', ({ loaded, total }) => handleProgressFunctionality(loaded, total, name ) );
 
    request.send(formData);
@@ -47,7 +47,6 @@ async function uploadImage(name) {
 
 function redirectWithParams(){
    let URL_PARAMS = new URLSearchParams();
-   URL_PARAMS.append("Succsess", null);
    let i = 0;
    window.images.forEach( element => { URL_PARAMS.append(`image${i++}`,  element )})
    window.location.href = `/pointUpload?${URL_PARAMS.toString()}`;
@@ -143,7 +142,7 @@ function createResponseObject() {
    POST_REQUEST_ARTPOINT_DATA.description = DESCRIPTION_INPUT.value;
    POST_REQUEST_ARTPOINT_DATA.creationDate = DATE_Input.value;
    // small hack to have the date in ISO format so sql can parse it
-   POST_REQUEST_ARTPOINT_DATA.date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+   POST_REQUEST_ARTPOINT_DATA.date = new Date().toISOString().split('T')[0];
    POST_REQUEST_ARTPOINT_DATA.latitude = LATITUDE_INPUT_FIELD.value;
    POST_REQUEST_ARTPOINT_DATA.longitude = LONGITUDE_INPUT_FIELD.value;
 
@@ -151,13 +150,15 @@ function createResponseObject() {
    // the getAll returns the parameter as [] instead of retrieving the object thats why we do it like this.
    let urlParameter = getURLparameter();
  
+   // well this is a bit tricky solution but well okay it works i guess cause if the person wants to upload multible images we need to have a way to seperate the image pointers NOTE: might write a batch job for deleting all pictures from the server that dont have a corresponding image pointer in our database,l.
+   
    let S_AllPointer = "";
-   urlParameter.forEach( (value, key) => { S_AllPointer =  S_AllPointer.concat( ";",`${value};`)});
+   urlParameter.forEach( (value, key) => { S_AllPointer =  S_AllPointer.concat( ";",`${value}`)});
 
    console.log(S_AllPointer);
 
 
-   POST_REQUEST_ARTPOINT_DATA.picturePointer = "";
+   POST_REQUEST_ARTPOINT_DATA.picturePointer = S_AllPointer;
 
    return POST_REQUEST_ARTPOINT_DATA;
 }
@@ -194,4 +195,4 @@ function getURLparameter() {
 
 
 
-export { postData, uploadImage, UploadArtPointData, getURLparameter };
+export { redirectWithParams ,postData, uploadImage, UploadArtPointData, getURLparameter };

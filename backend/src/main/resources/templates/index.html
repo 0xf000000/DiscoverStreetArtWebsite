@@ -9,12 +9,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-  
+    <script type="module"  src="js/indexPage.js" defer > </script>  
   <style>
     .header {
       background: url('https://discover-streetart.de/wp-content/uploads/2023/12/DSC05626-scaled-e1702400725598-1536x1262.jpg') no-repeat center center;
       background-size: cover;
-      height: 75vh;
+      height: 75vh; 
       position: relative;
     }
     .header .overlay {
@@ -94,10 +94,6 @@
           <a class="nav-link active" aria-current="page" href="#">Menu</a>
         </li>
         <!-- Search form -->
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Suche</button>
-        </form>
         <!-- Add more nav-item here if needed -->
       </ul>
 
@@ -130,7 +126,7 @@
         <h1 class="display-3">Discover Streetart</h1>
         <p class="lead mb-0">small tag, big art</p>
         <br>
-        <button class="btn btn-primary btn-lg"> <a href="/map">Suchen</a></button>
+        <button class="btn btn-primary btn-lg suchenButton">Suchen</button>
       </div>
     </div>
   </div>
@@ -153,38 +149,12 @@
 
    <div class="carousel-inner">  <div class="carousel-item active">
     <div class="container">
-      <div class="row">
-        <!-- Erste Gruppe von Bildern -->
-        <div class="col-md-4">
-          <div class="card">
-            <img src="https://discover-streetart.de/wp-content/uploads/2023/12/DSC05626-scaled-e1702400725598-1536x1262.jpg"
-                 class="card-img-top" alt="Kunstwerk 1">
-            <div class="card-body">
-              <h5 class="card-title">Unterschrift Bild 1</h5>
-              <p class="card-text">Adresse 1</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="https://discover-streetart.de/wp-content/uploads/2023/12/DSC05626-scaled-e1702400725598-1536x1262.jpg"
-                 class="card-img-top" alt="Kunstwerk 2">
-            <div class="card-body">
-              <h5 class="card-title">Unterschrift Bild 2</h5>
-              <p class="card-text">Adresse 2</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="https://discover-streetart.de/wp-content/uploads/2023/12/DSC05626-scaled-e1702400725598-1536x1262.jpg"
-                 class="card-img-top" alt="Kunstwerk 3">
-            <div class="card-body">
-              <h5 class="card-title">Unterschrift Bild 3</h5>
-              <p class="card-text">Adresse 3</p>
-            </div>
-          </div>
-        </div>
+      <div class="row firstThreePictures">
+
+
+
+
+            <!-- Erste Gruppe von Bildern -->
       </div>
     </div>
   </div>
@@ -373,7 +343,7 @@ gen -->
     <div class="col-md-3 cta-text rounded-custom">
       <h2>selber was gesehen?</h2>
       <p>lade dein foto hoch!</p>
-      <button class="btn btn-lg cta-btn mt-3" type="button">+ hochladen</button>
+      <button class="btn btn-lg cta-btn mt-3 hochladenButton" type="button">+ hochladen</button>
     </div>
     <!-- SVG Bildbereich -->
     <div class="col-md-3">

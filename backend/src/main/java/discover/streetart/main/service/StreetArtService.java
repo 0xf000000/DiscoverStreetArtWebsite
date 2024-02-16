@@ -7,8 +7,7 @@ import discover.streetart.main.repositery.StreetArtRepositery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class StreetArtService {
@@ -33,6 +32,22 @@ public class StreetArtService {
         streetArtRepositery.deleteById(id);
     }
 
+    public List<StreetArt> getLatestStreetArt(){
+         ArrayList<StreetArt> ArtList = (ArrayList<StreetArt>) streetArtRepositery.findAll();
+         if(ArtList.size() <= 6){
+             return ArtList;
+         }
+
+               // using here var operator cause it should be clear what datatype were referenzing
+        Collections.sort(ArtList);
+        ArrayList<StreetArt> finalArtList = new ArrayList<StreetArt>();
+        for( int i = ArtList.size() -1; i > ArtList.size() - 6; i--){
+            finalArtList.add(ArtList.get(i));
+        }
+
+        return finalArtList;
+    }
+
 
     public Optional<StreetArt> findById(Long id){
 
@@ -40,9 +55,6 @@ public class StreetArtService {
 
     }
 
-    public void AddStreetArt(StreetArt streetArt){
-        streetArtRepositery.save(streetArt);
-    }
 
 
     public List<StreetArt> getAll(){

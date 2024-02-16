@@ -80,16 +80,17 @@
       <!-- this form is for all the other data we want to upload long latitude usw-->
       <form id="streetArtDATA" method="post" th:action="@{/streetArt}" enctype="text/plain">
         <div class="form-group dataInputForm" id="dataGROUP">
-          <label> name (*requird) </label>
-          <input id="name" placeholder="name" type="text" class="form-data">
+          <label class="form-label"> name (*requird) </label>
+          <input class="form-control form-data" id="name" placeholder="name" type="text">
+              
 
-          <label> artist </label>
-          <input id="artist" placeholder="artist name" type="text" class="form-data">
+          <label class="form-label"> artist </label>
+          <input class="form-control form-data" id="artist" placeholder="artist name" type="text">
 
-          <label> description </label>
-          <input id="description" placeholder="description" type="text" class="form-data">
-          <label> creation Date </label>
-          <input id="creationDate" placeholder="creation Date" type="date" class="form-data">
+          <label class="form-label"> description </label>
+          <input  class="form-control form-data"id="description" placeholder="description" type="text">
+          <label class="form-label"> creation Date </label>
+          <input class="form-control form-data" id="creationDate" placeholder="creation Date" type="date">
 
           <label> longitude</label>
           <input id="longitude" placeholder="longitude" type="text" class="form-data" readonly>

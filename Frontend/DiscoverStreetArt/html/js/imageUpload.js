@@ -1,7 +1,8 @@
 import { displayErrorMessage } from "./ErrorHandlingUpload.js";
-import { uploadImage } from "./Requests.js";
+import { redirectWithParams, uploadImage } from "./Requests.js";
 import { assertFileIsValid } from "./imageValidation.js"; 
 import { $ } from "./utils.js"
+
 let progressArea = $('.progress-area');
 let uploadArea = $('.uploaded-area');
 let fileInput = $(".fileInput");
@@ -11,9 +12,18 @@ window.images = [];
 
 window.onload = () => {
     const imageForms = $("#pictureForm");
-    
-    imageForms.addEventListener("click", activateFileInput );
+    const button = $(".btn")
+  button.addEventListener("click",eventRedirect);
+    imageForms.addEventListener("click", activateFileInput);
 
+}
+
+function eventRedirect(){
+  if(window.images.length == 0){
+    displayErrorMessage("please upload atleast one picture", "alert-danger");
+    return;
+  }
+  redirectWithParams();
 }
 
 function activateFileInput(){
@@ -39,13 +49,11 @@ if (!assertFileIsValid(files)){
 let file = files[0]; // selects the first file \
 
 if(file){
-    let fileName = file.name; 
+    let fileName = file.name.trim(); 
 
   
     uploadImage(fileName);
 }
-
-
 
 
 }

@@ -1,7 +1,7 @@
 package discover.streetart.main.controller;
 
 
-import org.slf4j.LoggerFactory;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,8 +19,8 @@ import java.util.logging.Logger;
 public class FileUploader {
 
 final String PICTURE_DIR = "/Users/leon/code/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures/";
-final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreetArtWebsite\\backend\\src\\main\\resources\\static\\pictures\\" +
-        "";
+// absolute path for the webserver to store the pictures
+final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreetArtWebsite\\backend\\src\\main\\resources\\static\\pictures\\";
 
 
     // we also should here validate that its a picture file and nothing else reallz important
@@ -36,7 +36,7 @@ final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreet
            }
 
            // holly shit cause im on windows i need to change it temporarly
-            file.transferTo(new File( PICTURE_DIR_WIN + file.getOriginalFilename()));
+            file.transferTo(new File( PICTURE_DIR + file.getOriginalFilename()));
 
         }catch(IOException e){
             System.out.println(e.fillInStackTrace());

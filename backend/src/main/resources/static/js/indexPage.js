@@ -1,4 +1,5 @@
 /* author: leon there will be some small functionality here for redirecting and making the slideshow better*/
+import { displayErrorMessage, handleStatusCodeResponse } from "./ErrorHandlingUpload.js";
 import { $ } from "./utils.js"
 
 window.onload  = () => {
@@ -7,9 +8,8 @@ window.onload  = () => {
   console.log(SuchenButton)
   hochLadenButton.addEventListener("click",() => { window.location.href = "/uploadImage"})
   SuchenButton.addEventListener("click", () => {  window.location.href= "/map";})
-  setSlideShowUp();
 }
-
+setSlideShowUp();
 
 // sets the newest streetArtPoints into the slideshow
 async function setSlideShowUp(){
@@ -21,6 +21,8 @@ let fetchOptions = {
 
   let response = await fetch("/api/v1/streetArt/latest", fetchOptions);
   let streetArtArray = await response.json();
+  let statusCode = await response.status;
+
   
   for( let i = 0; i < streetArtArray.length; i++){
     let picturePointer = streetArtArray[i].picturePointer.split(";");

@@ -18,15 +18,16 @@ async function postData(url, fetchOptions) {
 
 async function uploadImage(name) {
    const pictureForm = $("#pictureForm");
-     
+   const inputForm = $(".fileInput");
    const url = "/api/v1/upload";
    const method = "post";
-   const formData = new FormData(pictureForm);
+   let formData = new FormData(pictureForm);
+  // small hack that letm me change the filename from the FormData object
 
    let request = new XMLHttpRequest(); // creating xml request object need to use it cause there is no way in fetch() to track upload progress
    request.open(method, url);
   
-   request.upload.addEventListener('progress', ({ loaded, total }) => handleProgressFunctionality(loaded, total, name ) );
+   request.upload.addEventListener('progress', ({ loaded, total }) => handleProgressFunctionality(loaded, total, name ));
 
    request.send(formData);
    // i hate xmlhttprequest object is there a normal fucking way to retrieve the status code
@@ -153,11 +154,18 @@ function createResponseObject() {
    // well this is a bit tricky solution but well okay it works i guess cause if the person wants to upload multible images we need to have a way to seperate the image pointers NOTE: might write a batch job for deleting all pictures from the server that dont have a corresponding image pointer in our database,l.
    
    let S_AllPointer = "";
-   urlParameter.forEach( (value, key) => { S_AllPointer =  S_AllPointer.concat( ";",`${value}`)});
+   urlParameter.forEach( (value, key) => {
+    
+    if (S_AllPointer == ""){
+      S_AllPointer = value;
+    }
+    else{
 
-   console.log(S_AllPointer);
-
-
+      S_AllPointer =  S_AllPointer.concat( ";",`${value}`)
+    
+    }
+    });
+    alert(S_AllPointer);
    POST_REQUEST_ARTPOINT_DATA.picturePointer = S_AllPointer;
 
    return POST_REQUEST_ARTPOINT_DATA;

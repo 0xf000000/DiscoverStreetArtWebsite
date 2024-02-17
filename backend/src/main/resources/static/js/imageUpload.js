@@ -49,13 +49,15 @@ if (!assertFileIsValid(files)){
 let file = files[0]; // selects the first file \
 
 if(file){
-    let fileName = file.name; 
+    let fileName = file.name;
+
+    // we replace all the ; for our pic pointer also trimming and removing white space 
+    fileName = fileName.replace(';','').trim().replace(/\s/g,'');
+    fileName =  encodeURI(fileName); 
 
   
     uploadImage(fileName);
 }
-
-
 
 
 }

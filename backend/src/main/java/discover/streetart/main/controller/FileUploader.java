@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
 @Controller
@@ -35,8 +37,9 @@ final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreet
                return new ResponseEntity<>("uploaded File is not an Image", HttpStatus.BAD_REQUEST);
            }
 
+           String fileName = encodeFileName(file.getOriginalFilename());
            // holly shit cause im on windows i need to change it temporarly
-            file.transferTo(new File( PICTURE_DIR + file.getOriginalFilename()));
+            file.transferTo(new File( PICTURE_DIR + fileName));
 
         }catch(IOException e){
             System.out.println(e.fillInStackTrace());
@@ -44,6 +47,21 @@ final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreet
         }
 
         return new ResponseEntity<>(file.getOriginalFilename(), HttpStatus.OK);
+    }
+
+
+    /**
+     * code duplication this method is only here to encode the filename
+     * @param filename
+     * @return
+     */
+    private String encodeFileName(String filename){
+        String CRYPTET_STRING = filename.replaceAll("\\s+","");
+        CRYPTET_STRING = CRYPTET_STRING.replace(";", "");
+       CRYPTET_STRING =  URLEncoder.encode(CRYPTET_STRING, StandardCharsets.UTF_8);
+
+
+       return CRYPTET_STRING;
     }
 
 

@@ -1,6 +1,10 @@
 /* author: leon there will be some small functionality here for redirecting and making the slideshow better*/
 import { displayErrorMessage, handleStatusCodeResponse } from "./ErrorHandlingUpload.js";
 import { $ } from "./utils.js"
+import { base64Decode } from "./crypt.js"
+
+
+
 
 window.onload  = () => {
   let SuchenButton = $(".SuchenButton");
@@ -26,7 +30,6 @@ let fetchOptions = {
   
   for( let i = 0; i < streetArtArray.length; i++){
     let picturePointer = streetArtArray[i].picturePointer.split(";");
-    
     
     
       let html = getSlideShowHtml(picturePointer[0], streetArtArray[i].description, "test");

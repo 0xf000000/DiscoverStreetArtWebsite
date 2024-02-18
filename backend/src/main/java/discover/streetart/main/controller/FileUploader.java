@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLOutput;
+import java.util.Base64;
 import java.util.logging.Logger;
 
 @Controller
@@ -56,12 +59,25 @@ final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreet
      * @return
      */
     private String encodeFileName(String filename){
-        String CRYPTET_STRING = filename.replaceAll("\\s+","");
-        CRYPTET_STRING = CRYPTET_STRING.replace(";", "");
-       CRYPTET_STRING =  URLEncoder.encode(CRYPTET_STRING, StandardCharsets.UTF_8);
+        String CRYPTET_STRING = filename.replaceAll("\\s+","")
+                .replace(";", "");
+
+        String paths[] = CRYPTET_STRING.split("\\.");
+        final int LENGTH  = paths.length -1 ;
+        StringBuilder builder = new StringBuilder();
+        // we dont know how many . there are in the string we only know that the last split is the file ending
+        for( int i = 0; i < LENGTH; i++){
+            if( i != LENGTH){
+                builder.append(paths[i]);
+            }
+        }
+
+        String base64EndcodedFileName = Base64.getEncoder().encodeToString(builder.toString().getBytes());
+
+        String FINAL_FILENAME = base64EndcodedFileName + "." + paths[LENGTH];
 
 
-       return CRYPTET_STRING;
+       return FINAL_FILENAME;
     }
 
 

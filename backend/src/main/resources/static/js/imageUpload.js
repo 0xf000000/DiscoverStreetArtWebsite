@@ -1,5 +1,6 @@
 import { displayErrorMessage } from "./ErrorHandlingUpload.js";
 import { redirectWithParams, uploadImage } from "./Requests.js";
+import { base64Encode } from "./crypt.js";
 import { assertFileIsValid } from "./imageValidation.js"; 
 import { $ } from "./utils.js"
 
@@ -53,10 +54,23 @@ if(file){
 
     // we replace all the ; for our pic pointer also trimming and removing white space 
     fileName = fileName.replace(';','').trim().replace(/\s/g,'');
-    fileName =  encodeURI(fileName); 
-
+    
+    let filenameSplits = fileName.split(".");
+    let LENGTH = filenameSplits.length -1;
+    let base64EncodedName = "";
+    for( let i = 0; i < LENGTH ; i++){
+      if( i != LENGTH ){
+      base64EncodedName += filenameSplits[i];
+      }
+    }
+    
+    base64EncodedName = base64Encode(base64EncodedName);
   
-    uploadImage(fileName);
+
+    base64EncodedName = base64EncodedName + '.'+ filenameSplits[LENGTH];
+    console.log(base64EncodedName);
+    uploadImage(base64EncodedName);
+
 }
 
 

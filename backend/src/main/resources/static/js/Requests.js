@@ -165,7 +165,6 @@ function createResponseObject() {
     
     }
     });
-    alert(S_AllPointer);
    POST_REQUEST_ARTPOINT_DATA.picturePointer = S_AllPointer;
 
    return POST_REQUEST_ARTPOINT_DATA;

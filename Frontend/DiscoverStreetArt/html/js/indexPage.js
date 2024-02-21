@@ -7,7 +7,7 @@ window.onload  = () => {
 
   let SuchenButton = $(".SuchenButton");
   let hochLadenButton = $(".hochLadenButton");
-  console.log(SuchenButton)
+  console.log(SuchenButton) 
   hochLadenButton.addEventListener("click",() => { window.location.href = "/uploadImage"})
   SuchenButton.addEventListener("click", () => {  window.location.href= "/map";})
 }
@@ -16,38 +16,64 @@ SLIDE_SHOW_INIT();
 
 function SLIDE_SHOW_INIT(){
 
-
-
 if(isOnMobileDevice()){
     setMobileSlideshow();
 }
 else{
-  setSlideShowUp()
+  disableMobileButtons();
+  setSlideShowUp();
 }
+
+}
+
+function disableMobileButtons(){
+  let buttons = document.getElementsByClassName("mobileButton");
+  let LENGTH  = buttons.length;
+  for( let i = 0; i < LENGTH; i++){
+    buttons[i].style.display ="none";
+  }
 
 }
 
 
 // well i really really really dont like this solution cause we will dublicate here but if i try to handle it in the same it gets even more messy
+// well well even got messier but there is a bug on mobile with fetching it 
 async function setMobileSlideshow(){
-  let container = $(".mobileSlideShow");
+  try{
+  
 
   let response = await fetch("/api/v1/streetArt/latest");
   let streetArtArray = await response.json();
   let statusCode = await response.status;
+  
+  if (statusCode != 200){
+    return;
+  }
 
-  for(let i = 0; i < streetArtArray.length -1; i++){
-    let html;
-    if (i == 0 ){
-      html = getMobileSlideShowHtml(picturePointer[0], streetArtArray[i].picture_Name, "test",true);
-    }
-    else{
-     let picturePointer = streetArtArray[i].picturePointer.split(";");
-     html = getMobileSlideShowHtml(picturePointer[0], streetArtArray[i].picture_Name, "test", false);
-    container.insertAdjacentHTML("afterbegin", html);
-    
-    }
-    }
+  let firstPicturePointer = streetArtArray[0].picturePointer.split(";");
+  let secondPicturePointer = streetArtArray[1].picturePointer.split(";");
+
+  let firstImage = $(".firstImage");
+  let firstTitle = $(".firstTitle");
+  let secondImage = $(".secondImage");
+  let secondTitle =$(".secondTitle");
+  let adress = document.getElementsByClassName("adress");
+
+  firstImage.src = firstPicturePointer[0];
+  secondImage.src = secondPicturePointer[0];
+
+  firstTitle.innerText = streetArtArray[0].picture_Name;
+  secondTitle.innerText = streetArtArray[1].picture_Name;
+
+  for( let i = 0; i < 2; i++){
+    adress[i].innerText = streetArtArray[i].date;
+  }
+
+
+
+}catch(err){
+  alert(err);
+}
 
 }
 

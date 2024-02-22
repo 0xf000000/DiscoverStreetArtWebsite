@@ -1,20 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Map</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaflet Karte mit Marker und durchschaltbarer Vorschaukarte</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/map.css">
+  <script type="module" src="js/mapPage.js" defer></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <!-- Logo oder Titel der Website -->
+      <a class="navbar-brand" href="/">Discover Streetart</a>
+      
+     
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Navbar content for toggling -->
+      <div class="collapse navbar-collapse" id="navbarToggler">
+        <!-- Navigation links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Menu</a>
+          </li>
+          <!-- Search form -->
+          <!-- Add more nav-item here if needed -->
+        </ul>
+        
+        
+        <!-- Sign in and registration links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Register/Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/uploadImage" style="font-weight: bold; ">+</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>       
 
-<link href="./css/footer.css" rel="stylesheet">
+
+  
 </head>
 <body>
-<h1>Map</h1>
+
+<div id="mapid"></div>
+
+<div class="preview-card hidden">
+  <div class="close-btn">&times;</div>
+  <img src="" alt="Bildbeschreibung" class="preview-image">
+  <div class="image-navigation hidden">
+    <button class="previous-image">&#10094;</button>
+    <button class="next-image">&#10095;</button>
+  </div>
+  <div class="container">
+    <h4><b class="title">Titel der Preview Card</b></h4> 
+    <p class="address">Mauenheimer Straße 51, 50733 Köln</p> 
+  </div>
+</div>
+
 </body>
-
-
-<footer class=" text-center text-lg-start bg-light text-muted">
-    <div class="text-center p-4">
-      © 2024 discover-streetart.de
-      <a class="text-reset fw-bold" href="#">Back to top</a>
-    </div>
-  </footer>
 </html>

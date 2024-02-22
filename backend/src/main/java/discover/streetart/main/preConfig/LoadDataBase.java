@@ -29,6 +29,8 @@ public class LoadDataBase {
      * @param streetArtRepositery
      * @return
      */
+
+    /*
     @Bean
     CommandLineRunner initDatabase(StreetArtRepositery streetArtRepositery, CommentRepositery commentRepositery, UserRepository userRepository){
 
@@ -48,4 +50,6 @@ public class LoadDataBase {
             log.info("SETUP FINISHED TO SEE PLEASE VISIT 'http://localhost:8080/'");
         };
     }
+
+    */
 }

@@ -2,7 +2,7 @@ package discover.streetart.main.security;
 
 import discover.streetart.main.domain.CustomOAuth2User;
 import discover.streetart.main.domain.Role;
-import discover.streetart.main.service.CustomOAuthUserService;
+
 import discover.streetart.main.service.IUserService;
 import discover.streetart.main.service.UserService;
 import jakarta.servlet.ServletException;
@@ -38,8 +38,9 @@ public class SecurityConfiguration {
     @Autowired
     IUserService userDetailsService;
 
-    @Autowired
-    private CustomOAuthUserService oAuthUserService;
+
+   // @Autowired
+   // private CustomOAuthUserService oAuthUserService;
 
     @Bean
     public PasswordEncoder passwordEncoder(){

@@ -1,14 +1,14 @@
 package discover.streetart.main.domain;
-
+/*
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.Map;
+*/
+public class CustomOAuth2User{
 
-public class CustomOAuth2User implements OAuth2User {
-
-
+/*
 
     private OAuth2User oAuth2User;
 
@@ -42,6 +42,6 @@ public class CustomOAuth2User implements OAuth2User {
 
         return oAuth2User.<String>getAttribute("email");
     }
-
+*/
 
 }

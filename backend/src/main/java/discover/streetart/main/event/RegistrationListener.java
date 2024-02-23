@@ -60,7 +60,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(RECIVER_ADRESS);
         email.setSubject(subject);
-        email.setText(" Hello new User, \n please visit the following link to verify your email address " + "\r\n" + "http://localhost:8080" + confirmationUrl);
+        email.setText(" Hello new User, \n please visit the following link to verify your email address " + "\r\n" + "https://discover-streetart.de" + confirmationUrl);
         mailSender.send(email);
 
 

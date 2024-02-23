@@ -91,7 +91,10 @@ so the deleteUser and addUser endpoints would fall appart
 
 1- FINISH SECURITY IMPLEMENTATION
 2. BUILD BACKEND and data visualisation
-
+okok -> Logout button
+-> secure api
+implement https 
+-> when ur logged in, u cant visit login page and registration page
 
 
 

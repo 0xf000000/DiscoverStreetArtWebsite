@@ -18,6 +18,8 @@ var mymap = L.map('mapid').setView([50.9575, 6.9603], 13); // Köln Koordinaten
   }).addTo(mymap);
 
   var images = [
+  "/pictures/google.com",
+  ""
     // Fügen Sie hier weitere Bildpfade hinzu
   ];
   var currentIndex = 0;
@@ -49,7 +51,7 @@ var mymap = L.map('mapid').setView([50.9575, 6.9603], 13); // Köln Koordinaten
     let LENGTH = picturePointer.length;
     
     for( let i = 0; i <  LENGTH; i++){
-    images.push(picturePointer[i]);
+    images.push( `/pictures/${picturePointer[i]}`);
     }
 
     previewImage.src =`/pictures/${picturePointer[0]}`;

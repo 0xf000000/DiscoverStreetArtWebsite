@@ -157,14 +157,10 @@ public class UserService implements IUserService {
 
 
         List<Role> roles = Arrays.asList(user.getRole());
-        UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
-                .password(user.getPassword())
-                .roles(Role.USER.toString())
-                .build();
 
 
 
-        return   userDetails;
+
+        return   user;
     }
 }

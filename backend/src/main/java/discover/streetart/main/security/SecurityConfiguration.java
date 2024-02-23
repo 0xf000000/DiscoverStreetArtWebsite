@@ -55,7 +55,6 @@ public class SecurityConfiguration {
 
 
         http.csrf().disable().cors().disable()
-
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/uploadImage","/streetArtUpload").authenticated()
                 .requestMatchers(HttpMethod.POST,"/api/vi/comments", "/api/v1/streetArt", "api/v1/upload").authenticated()

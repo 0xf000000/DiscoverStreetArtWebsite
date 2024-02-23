@@ -6,9 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.PropertySource;
+
 
 @SpringBootApplication
-
 public class StreeApplication extends SpringBootServletInitializer {
   
 	private Logger logger = LoggerFactory.getLogger(StreeApplication.class);
@@ -18,10 +19,15 @@ public class StreeApplication extends SpringBootServletInitializer {
 		return application.sources(StreeApplication.class);
 	}
 
-
+	
 	public static void main(String[] args) {
 		IMAGE_DIR = "/Users/leon/code/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures";
-		SpringApplication.run(StreeApplication.class, args);
+		SpringApplication application = new SpringApplication(StreeApplication.class);
+		application.run(args);
+	
+
+
+
 	}
 
 }

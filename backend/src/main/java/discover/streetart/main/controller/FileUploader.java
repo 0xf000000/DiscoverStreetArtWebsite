@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 @Controller
 public class FileUploader {
 
-final String PICTURE_DIR = "/Users/leon/code/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures/";
+final String PICTURE_DIR = "/home/leon/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures";
 // absolute path for the webserver to store the pictures
 final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreetArtWebsite\\backend\\src\\main\\resources\\static\\pictures\\";
 

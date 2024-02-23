@@ -54,13 +54,13 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
 
-        http
-                .csrf().disable().cors().disable()
-                .requiresChannel()
-    .requestMatchers(HttpMethod.GET, "/uploadImage","/streetArtUpload").authenticated()
-                .requestMatchers(HttpMethod.POST,"/api/vi/comments", "/api/v1/streetArt", "api/v1/upload").authenticated()
+        http.csrf().disable().cors().disable()
+
+                .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.GET, "/uploadImage","/streetArtUpload").authenticated()
+                .requestMatchers(HttpMethod.POST,"/api/v1/comments", "/api/v1/streetArt", "api/v1/upload").authenticated()
                 .requestMatchers(HttpMethod.DELETE, "/comments/delete/{id}").hasRole("ADMIN")
-                .requestMatchers("/**").permitAll()
+                .requestMatchers(new AntPathRequestMatcher( "/api/v1/streetArt/latest")).permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

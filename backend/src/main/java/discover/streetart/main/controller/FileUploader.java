@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 @Controller
 public class FileUploader {
 
-final String PICTURE_DIR = "/home/leon/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures";
+final String PICTURE_DIR = "/home/leon/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures/";
 // absolute path for the webserver to store the pictures
 final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreetArtWebsite\\backend\\src\\main\\resources\\static\\pictures\\";
 
@@ -60,13 +60,15 @@ final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreet
      */
     private String encodeFileName(String filename){
         String CRYPTET_STRING = filename.replaceAll("\\s+","")
-                .replace(";", "");
+                .replace(";", "")
+		.replaceAll("=", "");
 
         String paths[] = CRYPTET_STRING.split("\\.");
         final int LENGTH  = paths.length -1 ;
         StringBuilder builder = new StringBuilder();
         // we dont know how many . there are in the string we only know that the last split is the file ending
-        for( int i = 0; i < LENGTH; i++){
+        // what the fuck did i do here
+	for( int i = 0; i < LENGTH; i++){
             if( i != LENGTH){
                 builder.append(paths[i]);
             }

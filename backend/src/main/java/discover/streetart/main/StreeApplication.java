@@ -21,7 +21,7 @@ public class StreeApplication extends SpringBootServletInitializer {
 
 	
 	public static void main(String[] args) {
-		IMAGE_DIR = "/Users/leon/code/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures";
+		IMAGE_DIR = "/home/leon/DiscoverStreetArtWebsite/backend/src/main/resources/static/pictures";
 		SpringApplication application = new SpringApplication(StreeApplication.class);
 		application.run(args);
 	

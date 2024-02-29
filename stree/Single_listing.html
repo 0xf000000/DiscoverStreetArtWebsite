@@ -27,13 +27,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Menu</a>
           </li>
-          <!-- Search form -->
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Suche</button>
-        </form>
-          <!-- Add more nav-item here if needed -->
-        </ul>
+         
         
         
         <!-- Sign in and registration links -->
@@ -59,26 +53,56 @@
             <img src="https://via.placeholder.com/800x600" class="img-fluid mb-3" alt="Hauptbild der Streetart" data-bs-toggle="modal" data-bs-target="#imageGalleryModal">
         </div>
 
+ 
+
         <div class="col-12">
             <!-- Text -->
-            <div class="accordion" id="infoAccordion">
+            <div class="accordion" id="mainAccordion">
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingDescription">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDescription" aria-expanded="true" aria-controls="collapseDescription">
+                    <h2 class="accordion-header" id="infoDescription">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfoDescription" aria-expanded="true" aria-controls="collapseInfoDescription">
                             Beschreibung
                         </button>
                     </h2>
-                    <div id="collapseDescription" class="accordion-collapse collapse show" aria-labelledby="headingDescription" data-bs-parent="#infoAccordion">
+                    <div id="collapseInfoDescription" class="accordion-collapse collapse show" aria-labelledby="infoDescription" data-bs-parent="#mainAccordion">
                         <div class="accordion-body">
-                            Detaillierte Beschreibung des Kunstwerks. Geschichte, Inspiration und alles, was es darüber zu wissen gibt.
+                            Spaceholder
                         </div>
                     </div>
                 </div>
-                <!-- Weitere Akkordeon-Elemente können hier hinzugefügt werden -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDate">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDate" aria-expanded="false" aria-controls="collapseDate">
+                            Hochgeladen am
+                        </button>
+                    </h2>
+                    <div id="collapseDate" class="accordion-collapse collapse" aria-labelledby="headingDate" data-bs-parent="#mainAccordion">
+                        <div class="accordion-body">
+                            Spaceholder
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="artistDescription">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseArtistDescription" aria-expanded="false" aria-controls="collapseArtistDescription">
+                            Künstler
+                        </button>
+                    </h2>
+                    <div id="collapseArtistDescription" class="accordion-collapse collapse" aria-labelledby="artistDescription" data-bs-parent="#mainAccordion">
+                        <div class="accordion-body">
+                            Spaceholder
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- Weitere Akkordeon-Elemente können hier hinzugefügt werden -->
         </div>
     </div>
 </div>
+            
+        
+    
+
 
 <!-- Modal als Galerie -->
 <div class="modal fade" id="imageGalleryModal" tabindex="-1" aria-labelledby="imageGalleryModalLabel" aria-hidden="true">

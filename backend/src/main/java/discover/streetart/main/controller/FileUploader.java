@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriter;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -18,6 +22,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLOutput;
 import java.util.Base64;
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 @Controller
@@ -33,19 +38,30 @@ final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreet
     public ResponseEntity<String> uploadFile(  @RequestParam("image") MultipartFile file ) {
 
         try{
-            // here we need to change the paths, when we deploy to my server
-            // small checkup so we validate this is an immage file
+            // check contentType
            String contentType =  file.getContentType();
-           if(!(contentType.equals("image/jpeg") || contentType.equals("image/png")) && !file.getOriginalFilename().endsWith(".png") && !file.getOriginalFilename().endsWith(".jpg") ){
+           if(!(contentType.equals("image/jpeg") || contentType.equals("image/png"))){
+               return new ResponseEntity<>("uploaded File is not an Image", HttpStatus.BAD_REQUEST);
+           }
+           // check file ending
+           if( !(file.getOriginalFilename().endsWith(".jpg") || file.getOriginalFilename().endsWith(".png"))){
                return new ResponseEntity<>("uploaded File is not an Image", HttpStatus.BAD_REQUEST);
            }
 
            String fileName = encodeFileName(file.getOriginalFilename());
-           // holly shit cause im on windows i need to change it temporarly
-            file.transferTo(new File( PICTURE_DIR + fileName));
+            File imageFile = new File(PICTURE_DIR + fileName);
 
-        }catch(IOException e){
-            System.out.println(e.fillInStackTrace());
+            file.transferTo(imageFile);
+
+            String fileExtension = getFileExtension(fileName);
+            BufferedImage inputImage = ImageIO.read(imageFile);
+            Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(fileExtension);
+            ImageWriter writer = writers.next();
+
+
+
+        }catch(IOException exception){
+            System.out.println(exception.fillInStackTrace());
             return new ResponseEntity<>("something went wrong server Internally", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -78,6 +94,17 @@ final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreet
 
 
        return FINAL_FILENAME;
+    }
+
+    // we need the bare file extension in order to compress the image i got the feeling this website is very slow without it
+    String getFileExtension(String file){
+        String fileNameSplit [] = file.split(".");
+        int F_Length = fileNameSplit.length -1;
+        String fileExtension = null;
+
+        if( fileNameSplit[F_Length].equals(".jpg")) { fileExtension = fileNameSplit[F_Length];}
+        if( fileNameSplit[F_Length].equals(".png")) { fileExtension = fileNameSplit[F_Length];}
+       return fileExtension.replace(".","");
     }
 
 

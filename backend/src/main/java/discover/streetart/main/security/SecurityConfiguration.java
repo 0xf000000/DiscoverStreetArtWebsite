@@ -61,6 +61,7 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST,"/api/v1/comments", "/api/v1/streetArt", "api/v1/upload").authenticated()
                 .requestMatchers(HttpMethod.DELETE, "/comments/delete/{id}").hasRole("ADMIN")
                 .requestMatchers(new AntPathRequestMatcher( "/api/v1/streetArt/latest")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

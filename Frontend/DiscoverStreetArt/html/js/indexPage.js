@@ -58,7 +58,6 @@ async function setMobileSlideshow(){
   let secondImage = $(".secondImage");
   let secondTitle =$(".secondTitle");
   let adress = document.getElementsByClassName("adress");
-
   firstImage.src = firstPicturePointer[0];
   secondImage.src = secondPicturePointer[0];
 
@@ -160,7 +159,7 @@ function getSlideShowHtml( imagePath, unterschrift, adresse){
   // in order to get both slideshows working we need to check for mobile
   return `<div class="col-md-4">
           <div class="card">
-            <img src="pictures/${imagePath}"
+            <img class="carouselImage" src="pictures/${imagePath}"
                  class="card-img-top" alt="Kunstwerk 1">
             <div class="card-body">
               <h5 class="card-title">${unterschrift}</h5>

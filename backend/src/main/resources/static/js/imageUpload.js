@@ -53,7 +53,10 @@ if(file){
     let fileName = file.name;
 
     // we replace all the ; for our pic pointer also trimming and removing white space 
-    fileName = fileName.replace(';','').trim().replace(/\s/g,'');
+    fileName = fileName.replace(';','')
+		.trim()
+		.replace(/\s/g,'')
+		.replace("=","");
     
     let filenameSplits = fileName.split(".");
     let LENGTH = filenameSplits.length -1;

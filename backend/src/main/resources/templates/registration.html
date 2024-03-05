@@ -75,6 +75,8 @@
   }
   }</style>
 <body>
+	<!-- small solution in order redirect if user is auth -->
+	<div sec:authorize="isAuthenticated()">  <script> window.location.href="/" </script>    </div>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">

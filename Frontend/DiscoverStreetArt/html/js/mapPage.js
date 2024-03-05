@@ -39,11 +39,12 @@ var mymap = L.map('mapid').setView([50.9575, 6.9603], 13); // Köln Koordinaten
      let streetArtPoint = window.streetArtMap.get(S_LongLat);
     let containerAddress = $(".address");
     let containerTitle = $(".title");
+    let InfoButton = $(".infoButton");
     images = []; //images = []; // image is global
     
     containerTitle.innerText = streetArtPoint.picture_Name;
   containerAddress.innerText = streetArtPoint.date;
-
+    InfoButton.addEventListener("click", () => { window.location.href =`/singlePage?artId=${streetArtPoint.streetArtId}`;});
 
 // loading ne images first we need to parse the data
     

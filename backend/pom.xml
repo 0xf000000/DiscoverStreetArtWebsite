@@ -22,6 +22,7 @@
 
 		<!-- https://mvnrepository.com/artifact/javax.activation/com.springsource.javax.activation -->
 
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>

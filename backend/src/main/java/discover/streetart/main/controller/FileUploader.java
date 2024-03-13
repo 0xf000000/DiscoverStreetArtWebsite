@@ -56,7 +56,7 @@ final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreet
             File imageFile = new File(PICTURE_DIR + fileName);
 
             file.transferTo(imageFile);
-
+             // we try to compress the image so loading times get faster
             String fileExtension = getFileExtension(fileName);
             BufferedImage inputImage = ImageIO.read(imageFile);
             Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(fileExtension);
@@ -97,8 +97,7 @@ final String PICTURE_DIR_WIN = "C:\\Users\\GingerBeethoven\\code\\DiscoverStreet
         String paths[] = CRYPTET_STRING.split("\\.");
         final int LENGTH  = paths.length -1 ;
         StringBuilder builder = new StringBuilder();
-        // we dont know how many . there are in the string we only know that the last split is the file ending
-        // what the fuck did i do here
+        // we dont know how many '.' there are in the string we only know that the last split is the file ending
 	for( int i = 0; i < LENGTH; i++){
             if( i != LENGTH){
                 builder.append(paths[i]);

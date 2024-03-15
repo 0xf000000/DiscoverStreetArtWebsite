@@ -1,0 +1,270 @@
+
+
+
+
+#dataGROUP{
+
+display:flex;
+
+flex-direction: column;
+
+}
+
+
+#map{
+    height: 180px;
+    width: 500px;
+}
+
+
+.uploadContainer{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction: column;
+
+
+}
+
+input[type=text]{
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+   border-radius: 20px;
+   border: 1px solid #2d9fd9;
+   color: black;
+   width: 250px;
+   height: 30px;
+   padding-left: 10px;
+   margin: 5px;
+  }
+
+  input[type=date]{
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+     border-radius: 20px;
+     border: 1px solid #2d9fd9;
+     color: black;
+     width: 250px;
+     height: 30px;
+     padding-left: 10px;
+     margin: 5px;
+    }
+
+
+  /* ---------- NAVBAR ----------------- */
+
+  .header {
+    background: url('https://discover-streetart.de/wp-content/uploads/2023/12/DSC05626-scaled-e1702400725598-1536x1262.jpg') no-repeat center center;
+    background-size: cover;
+    height: 75vh;
+    position: relative;
+  }
+  .header .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .header .container {
+    position: relative;
+    z-index: 2;
+  }
+  .call-to-action {
+    background: purple; /* Farbe anpassen */
+  }
+  /* Weitere individuelle Styles hier */
+
+  /* ... andere Styles ... */
+
+  /* Carousel Steuerelemente pink färben */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: pink;
+    border-radius: 50%;
+  }
+
+  /* Carousel Indikatoren pink färben */
+  .carousel-indicators li {
+    background-color: pink;
+  }
+
+  /* Aktiven Carousel Indikator pink färben */
+  .carousel-indicators .active {
+    background-color: darkpink;
+  }
+
+  /* Weitere individuelle Styles hier */
+
+  @media (min-width: 992px) {
+  .navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .navbar-toggler {
+    display: none;
+  }
+}
+
+
+
+/* File input picture -- */
+
+.inputFileWrapper{
+
+  width: 430px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 5px;
+
+}
+.inputFileWrapper .immageheader{
+  color: #6990f2;
+  font-size: 27px;
+  font-weight: 600;
+  text-align: center;
+
+}
+
+
+.inputFileWrapper form{
+  height: 167px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px 0;
+  border-radius: 5px;
+  border: 2px dashed #6990f2;
+  
+cursor: pointer;
+}
+
+form :where(i,p){
+  color:#6990f2;
+
+
+}
+
+form i{
+  font-size: 50px;
+}
+
+form p{
+  font-size: 16px;
+}
+
+
+section .row{
+  background-color: #a1b3e0;
+  margin-bottom: 10px;
+  list-style: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+section .row i{
+  font-size: 30px;
+  color:#6990f2;
+
+}
+
+.progressArea .row .content{
+
+  width: 100%;
+  margin-left: 15px;
+
+
+
+}
+
+.progressArea .details{
+  display: flex;
+  align-items: center;
+  margin-bottom: 7px;
+  justify-content:space-between ;
+
+
+}
+
+.progressArea .progress-bar{
+  height: 6px;
+  width:100% ;
+  background: #fff;
+  margin-bottom: 4px;
+  border-radius: 30px ;
+}
+
+.progress-bar .progressss{
+  height: 100%;
+  width: 0%;
+  background: #6990f2;
+  border-radius: inherit;
+}
+
+.uploadedArea{
+  max-height: 230px;
+  overflow-y: scroll;
+}
+
+.uploadedArea::-webkit-scrollbar{
+  width: 0px;
+}
+
+
+ section .details span{
+  font-size: 14px;
+
+}
+
+.uploadedArea .row .content{
+
+  display: flex;
+  align-items: center;
+}
+
+.uploadedArea .row .details{
+  display: flex;
+  margin-left: 15px;
+  flex-direction: column;
+}
+
+.uploadedArea .details .size{
+  font-size: 11px;
+  color:#404040 ;
+}
+.uploadedArea .fa-check{
+  font-size: 16px;
+  color: #6990f2
+}
+
+
+.dataInputForm{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#submitPicture{
+cursor: pointer;
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+#mapid { height: 100vh; }
+    .hidden { display: none; }
+    .preview-card {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      width: 250px;
+      border-radius: 10px;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      position: absolute;
+      z-index: 1000;
+    }
+    .preview-card img {
+      width: 100%;
+      height: auto;
+    }
+    .container {
+      padding: 2px 16px;
+      background-color: white;
+    }
+    .container h4 {
+      margin-top: 0;
+    }
+    .address {
+      color: grey;
+      font-size: 12px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      z-index: 1010;
+    }
+    .image-navigation {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none; /* Allows click events to pass through */
+      z-index: 1005;
+    }
+    .image-navigation button {
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      padding: 10px;
+      color: white;
+      cursor: pointer;
+      pointer-events: auto; /* Reactivate click events for buttons */
+      font-size: 18px;
+    }
